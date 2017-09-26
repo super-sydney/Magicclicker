@@ -1,0 +1,35 @@
+button{
+	color: black;
+	border: 2px solid black;
+	width: 150px;
+	height: 60px;
+	font-family: calibri;
+	font-size: 22
+}
+
+img{
+	width: 75;
+	height: 75;
+}
+
+#magicb{
+	background: url(Sprites/rabbit.png) no-repeat center;
+	width: 220;
+	height: 195;
+}
+
+a{
+	font-family: calibri;
+	font-size: 18;
+}
+
+span{
+	font-family: calibri;
+	font-size: 18;
+}
+
+span#price{
+	position: absolute;
+	padding-top: 57;
+	left: 500;
+}
