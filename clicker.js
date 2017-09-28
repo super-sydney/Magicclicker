@@ -1,4 +1,4 @@
-var magic = 0, teddy = 0, slime = 0, troll = 0, cookie = 0, bologna = 0, unicorn = 0, lnmonster = 0, bigfoot = 0,
+var prestige = 0, magicAllTime = 0, magic = 0, teddy = 0, slime = 0, troll = 0, cookie = 0, bologna = 0, unicorn = 0, lnmonster = 0, bigfoot = 0,
 nymph = 0, dragon = 0, phoenix = 0, demonteddy = 0;
 
 //getting magic
@@ -7,15 +7,10 @@ function magicClick(number){
     document.getElementById("magic").innerHTML = rogueDec(magic);
 };
 
-//get rid of rogue decimals
-function rogueDec(n){
-	n = Math.round(n*10)/10
-	return n;
-}
-
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("save"));
 	if (typeof savegame.magic !== "undefined"){
+		magicAllTime = savegame.magicAllTime
 		mps = savegame.mps
 		magic = savegame.magic
 		teddy = savegame.teddy
@@ -35,6 +30,7 @@ function load(){
 
 function save(){
 	var save ={
+		magicAllTime: magicAllTime,
 		mps: mps,
 		magic: magic,
 		teddy: teddy,
@@ -71,6 +67,32 @@ function hardReset(){
 	demonteddy = 0;
 	update()
 };
+
+function prestige(){
+	if (window.confirm("Do you want to prestige?\nyou have " + magic + " magic") == true){
+		prestige += 0.1;
+		magic = 0;
+		teddy = 0;
+		slime = 0;
+		troll = 0;
+		cookie = 0;
+		bologna = 0;
+		unicorn = 0;
+		lnmonster = 0;
+		bigfoot = 0;
+		nymph = 0;
+		dragon = 0;
+		phoenix = 0;
+		demonteddy = 0;
+		update()
+	}
+}
+
+//get rid of rogue decimals
+function rogueDec(n){
+	n = Math.round(n*10)/10
+	return n;
+}
 
 function buyTeddy(){
 	var cost = Math.floor(10*Math.pow(1.1,teddy));
@@ -229,12 +251,34 @@ function buyDemonteddy(){
 };
 
 window.setInterval(function(){
-	magicClick((teddy*0.1+slime*0.5+troll*2+cookie*5+bologna*15+unicorn*50+lnmonster*250+bigfoot*1000+nymph*5000+dragon*25000+phoenix*100000+demonteddy*1000000)/25);
+	magicClick(rogueDec(teddy*0.1+slime*0.5+troll*2+cookie*5+bologna*15+unicorn*50+lnmonster*250+bigfoot*1000+nymph*5000+dragon*25000+phoenix*100000+demonteddy*1000000)/25);
+	update()
 }, 40);
 
+window.setInterval(function(){
+	save()
+}, 10000);
+
+function abbreviateNumber(value) {
+    var newValue = value;
+    if (value >= 1000) {
+        var suffixes = ["", "k", "m", "b","t","q","Q","s","S"];
+        var suffixNum = Math.floor( (""+value).length/3 );
+        var shortValue = '';
+        for (var precision = 2; precision >= 1; precision--) {
+            shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
+            var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+            if (dotLessShortValue.length <= 2) { break; }
+        }
+        if (shortValue % 1 != 0)  shortNum = shortValue.toFixed(1);
+        newValue = shortValue+suffixes[suffixNum];
+    }
+    return newValue;
+}
+
 function update(){
-	document.getElementById("mps").innerHTML = rogueDec(teddy*0.1+slime*0.5+troll*2+cookie*5+bologna*15+unicorn*50+lnmonster*250+bigfoot*1000+nymph*5000+dragon*25000+phoenix*100000+demonteddy*1000000)
-	document.getElementById("magic").innerHTML = magic
+	document.getElementById("mps").innerHTML = abbreviateNumber(rogueDec(teddy*0.1+slime*0.5+troll*2+cookie*5+bologna*15+unicorn*50+lnmonster*250+bigfoot*1000+nymph*5000+dragon*25000+phoenix*100000+demonteddy*1000000))
+	document.getElementById("magic").innerHTML = abbreviateNumber(magic)
 	document.getElementById("teddy").innerHTML = teddy
 	document.getElementById("slime").innerHTML = slime
 	document.getElementById("troll").innerHTML = troll
