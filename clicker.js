@@ -278,7 +278,7 @@ function abbreviateNumber(value) {
 
 function update(){
 	document.getElementById("mps").innerHTML = abbreviateNumber(rogueDec(teddy*0.1+slime*0.5+troll*2+cookie*5+bologna*15+unicorn*50+lnmonster*250+bigfoot*1000+nymph*5000+dragon*25000+phoenix*100000+demonteddy*1000000))
-	document.getElementById("magic").innerHTML = abbreviateNumber(magic)
+	document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic))
 	document.getElementById("teddy").innerHTML = teddy
 	document.getElementById("slime").innerHTML = slime
 	document.getElementById("troll").innerHTML = troll
