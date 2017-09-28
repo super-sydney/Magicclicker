@@ -2,100 +2,102 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 	</head>
-	<body>
+	<body style="background-image: url(Sprites/room.png); background-attachment: fixed; background-size: cover;">
 		<button onclick="hardReset()">Hard Reset</button>
+		<button onclick="prestige()">Prestige</button>
+		<br>
 		<button onclick="save()">Save Game</button>
 		<button onclick="load()">Load Game</button>
 		<br><br>
 		<button id="magicb" onclick="magicClick(1)">Click Me!</button>
-		<span>Magic:</span>
+		<span>Magic:</span> 
 		<a id="magic">0</a>
 		<span>Magic Per Second:</span>
 		<a id="mps">0</a>
-		<br><br><br><br>
+		<br>
 		<img src="Sprites/teddy.png">
 		<button onclick="buyTeddy()">Buy Teddy</button>
 		<span>Teddy bears:</span>
 		<span id="teddy">0</span>
-		<span id="price">Price:</span>
-		<span id="teddyPrice" style="position: relative; left: 200">10</span>
+		<span>Price:</span>
+		<span id="teddyPrice">10</span>
 		<br>
 		<img src="Sprites/slime.png">
 		<button onclick="buySlime()">Buy Slime</button>
 		<span>Slimes:</span>
-		<span id="slime">0</span>
-		<span id="price">Price:</span>
-		<span id="slimePrice" style="position: relative; left: 242">50</span>
+		<span id="slime" >0</span>
+		<span>Price:</span>
+		<span id="slimePrice">50</span>
 		<br>
 		<img src="Sprites/troll.png">
-		<button onclick="buyTroll()">Buy Troll</button>
+		<button onclick="buyTroll()" >Buy Troll</button>
 		<span>Trolls:</span>
-		<span id="troll">0</span>
-		<span id="price">Price:</span>
-		<span id="trollPrice" style="position: relative; left: 252">100</span>
+		<span id="troll" >0</span>
+		<span>Price:</span>
+		<span id="trollPrice">100</span>
 		<br>
-		<img src="Sprites/cookie.png">
-		<button onclick="buyCookie()">Buy Magical cookie</button>
+		<img src="Sprites/cookie.png" >
+		<button onclick="buyCookie()" >Buy Magical cookie</button>
 		<span>Magical Cookies:</span>
-		<span id="cookie">0</span>
-		<span id="price">Price:</span>
-		<span id="cookiePrice" style="position: relative; left: 175">500</span>
+		<span id="cookie" >0</span>
+		<span>Price:</span>
+		<span id="cookiePrice">500</span>
 		<br>
 		<img src="Sprites/bologna.png">
-		<button onclick="buyBologna()">Buy Bologna Man</button>
+		<button onclick="buyBologna()" >Buy Bologna Man</button>
 		<span>Bologna Men:</span>
-		<span id="bologna">0</span>
-		<span id="price">Price:</span>
-		<span id="bolognaPrice" style="position: relative; left: 195">2000</span>
+		<span id="bologna" >0</span>
+		<span>Price:</span>
+		<span id="bolognaPrice">2000</span>
 		<br>
 		<img src="Sprites/unicorn.png">
-		<button onclick="buyUnicorn()">Buy Unicorn</button>
+		<button onclick="buyUnicorn()" >Buy Unicorn</button>
 		<span>Unicorn:</span>
-		<span id="unicorn">0</span>
-		<span id="price">Price:</span>
-		<span id="unicornPrice" style="position: relative; left: 235">10000</span>
+		<span id="unicorn" >0</span>
+		<span>Price:</span>
+		<span id="unicornPrice">10000</span>
 		<br>
 		<img src="Sprites/lnmonster.png">
-		<button onclick="buyLnmonster()">Buy L.N. Monster</button>
+		<button onclick="buyLnmonster()" >Buy L.N. Monster</button>
 		<span>Loch Ness Monsters:</span>
-		<span id="lnmonster">0</span>
-		<span id="price">Price:</span>
-		<span id="lnmonsterPrice" style="position: relative; left: 149">80000</span>
+		<span id="lnmonster" >0</span>
+		<span>Price:</span>
+		<span id="lnmonsterPrice">80000</span>
 		<br>
 		<img src="Sprites/bigfoot.png">
-		<button onclick="buyBigfoot()">Buy Big Foot</button>
+		<button onclick="buyBigfoot()" >Buy Big Foot</button>
 		<span>Big foots:</span>
-		<span id="bigfoot">0</span>
-		<span id="price">Price:</span>
-		<span id="bigfootPrice" style="position: relative; left: 232">400000</span>
+		<span id="bigfoot" >0</span>
+		<span>Price:</span>
+		<span id="bigfootPrice">400000</span>
 		<br>
 		<img src="Sprites/nymph.png">
-		<button onclick="buyNymph()">Buy Nymph</button>
+		<button onclick="buyNymph()" >Buy Nymph</button>
 		<span>Nymphs:</span>
-		<span id="nymph">0</span>
-		<span id="price">Price:</span>
-		<span id="nymphPrice" style="position: relative; left: 238">1666666</span>
+		<span id="nymph" >0</span>
+		<span>Price:</span>
+		<span id="nymphPrice">1666666</span>
 		<br>
 		<img src="Sprites/dragon.png">
-		<button onclick="buyDragon()">Buy Dragon</button>
+		<button onclick="buyDragon()" >Buy Dragon</button>
 		<span>Dragons:</span>
-		<span id="dragon">0</span>
-		<span id="price">Price:</span>
-		<span id="dragonPrice" style="position: relative; left: 238">10000000</span>
+		<span id="dragon" >0</span>
+		<span>Price:</span>
+		<span id="dragonPrice">10000000</span>
 		<br>
 		<img src="Sprites/phoenix.png">
-		<button onclick="buyPhoenix()">Buy Phoenix</button>
+		<button onclick="buyPhoenix()" >Buy Phoenix</button>
 		<span>Phoenix:</span>
-		<span id="phoenix">0</span>
-		<span id="price">Price:</span>
-		<span id="phoenixPrice" style="position: relative; left: 240">55000000</span>
+		<span id="phoenix" >0</span>
+		<span>Price:</span>
+		<span id="phoenixPrice">55000000</span>
 		<br>
 		<img src="Sprites/demonteddy.png">
-		<button onclick="buyDemonteddy()">Buy Demon Teddy Bear</button>
+		<button onclick="buyDemonteddy()" >Buy Demon Teddy Bear</button>
 		<span>Demon Teddy Bears:</span>
-		<span id="demonteddy">0</span>
-		<span id="price">Price:</span>
-		<span id="demonteddyPrice" style="position: relative; left: 155">1000000000</span>
+		<span id="demonteddy" >0</span>
+		<span  >Price:</span>
+		<span id="demonteddyPrice">1000000000</span>
 		<script type="text/javascript" src="clicker.js"></script>
 	</body>
 </html>
