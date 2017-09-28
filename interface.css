@@ -1,13 +1,13 @@
 button{
 	color: black;
 	border: 2px solid black;
-	width: 150px;
+	width: 200px;
 	height: 60px;
 	font-family: calibri;
 	font-size: 22
 }
 
-img{
+br + img{
 	width: 75;
 	height: 75;
 }
@@ -21,10 +21,4 @@ img{
 a, span{
 	font-family: calibri;
 	font-size: 18;
-}
-
-span#price{
-	position: absolute;
-	padding-top: 57;
-	left: 500;
 }
