@@ -1,7 +1,13 @@
+///setup
 var prestige = 0, magicAllTime = 0, magic = 0, teddy = 0, slime = 0, troll = 0, cookie = 0, bologna = 0, unicorn = 0, lnmonster = 0, bigfoot = 0,
 nymph = 0, dragon = 0, phoenix = 0, demonteddy = 0;
 
-//getting magic
+document.getElementById("tabpage1").style = ""
+		document.getElementById("tabpage2").style = "display: none;"
+		document.getElementById("tabpage3").style = "display: none;"
+		document.getElementById("tabpage4").style = "display: none;"
+
+//functions
 function magicClick(number){
     magic = magic + number;
     document.getElementById("magic").innerHTML = rogueDec(magic);
@@ -262,7 +268,7 @@ window.setInterval(function(){
 function abbreviateNumber(value) {
     var newValue = value;
     if (value >= 1000) {
-        var suffixes = ["", "k", "m", "b","t","q","Q","s","S"];
+        var suffixes = ["", "k", "m", "b","t","q","Q","s","S",];
         var suffixNum = Math.floor( (""+value).length/3 );
         var shortValue = '';
         for (var precision = 2; precision >= 1; precision--) {
@@ -274,6 +280,30 @@ function abbreviateNumber(value) {
         newValue = shortValue+suffixes[suffixNum];
     }
     return newValue;
+}
+
+function tab(n) {
+   	if (n == 1){
+		document.getElementById("tabpage1").style = ""
+		document.getElementById("tabpage2").style = "display: none;"
+		document.getElementById("tabpage3").style = "display: none;"
+		document.getElementById("tabpage4").style = "display: none;"
+	}else if (n == 2){
+		document.getElementById("tabpage1").style = "display: none;"
+		document.getElementById("tabpage2").style = ""
+		document.getElementById("tabpage3").style = "display: none;"
+		document.getElementById("tabpage4").style = "display: none;"
+	}else if (n == 3){
+		document.getElementById("tabpage1").style = "display: none;"
+		document.getElementById("tabpage2").style = "display: none;"
+		document.getElementById("tabpage3").style = ""
+		document.getElementById("tabpage4").style = "display: none;"
+	}else if (n == 4){
+		document.getElementById("tabpage1").style = "display: none;"
+		document.getElementById("tabpage2").style = "display: none;"
+		document.getElementById("tabpage3").style = "display: none;"
+		document.getElementById("tabpage4").style = ""
+	}
 }
 
 function update(){
