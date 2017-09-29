@@ -1,10 +1,11 @@
-button{
+img + button{
 	color: black;
 	border: 2px solid black;
 	width: 200px;
 	height: 60px;
 	font-family: calibri;
-	font-size: 22
+	font-size: 22;
+	word-wrap: break-word; 
 }
 
 br + img{
@@ -12,14 +13,37 @@ br + img{
 	height: 75;
 }
 
-#magicb{
-	background: url(Sprites/rabbit.png) no-repeat center;
-	width: 220;
-	height: 195;
-}
-
 a, span{
 	font-family: calibri;
 	font-size: 18;
 	color: white;
+}
+
+.btn-group button{
+	background-size: 50px 50px;
+	background-image: url(Sprites/tab1);
+	width: 75;
+	height: 75;
+    border: 2px solid black; 
+    color: black;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group button:not(:last-child){
+    border-right: none;
+}
+
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group button:hover{
+	border: 3px solid black;
+}
+
+.hide{
+	display: none;
 }
