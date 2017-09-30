@@ -3,6 +3,7 @@
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 	</head>
 	<body style="background-image: url(Sprites/room.png); background-attachment: fixed; background-size: cover;">
+		<script type="text/javascript" src="clicker.js"></script>
 		<button onmousedown="hardReset()">Hard Reset</button>
 		<button onmousedown="prestige()">Prestige</button>
 		<button onmousedown="save()">Save Game</button>
@@ -10,15 +11,14 @@
 		<br><br>
 		<div class="btn-group">
 			<button onclick="tab(1)" style="background-image: url(Sprites/tab1);">Upgrades</button>
-			<button onclick="tab(2)" style="background-image: url(Sprites/tab2);">Upgrades2</button>
-			<button onclick="tab(3)" style="background-image: url(Sprites/tab3);">Upgrades3</button>
-			<button onclick="tab(4)" style="background-image: url(Sprites/tab4);">Upgrades4</button>
+			<button onclick="tab(2)" style="background-image: url(Sprites/tab2);">Shop</button>
+			<button onclick="tab(3)" style="background-image: url(Sprites/tab3);">Mages</button>
+			<button onclick="tab(4)" style="background-image: url(Sprites/tab4);">Options</button>
 		</div>
 		<br>
-		<div id="tabpage1" class="tabpage">
-			<p id="shopheading" style="font-size: 26; font-family: calibri; color: white;">Shop</p>
-			<br>
-			<img src="Sprites/teddy.png">
+		<div style="" id="tabpage1" class="tabpage">
+			<p id="shopheading" style="font-size: 26; font-family: calibri; color: white;">Upgrades</p>
+			<img src="Sprites/teddy.png" style="width: 75; height: 75">
 			<button onmousedown="buyTeddy()">Buy Teddy</button>
 			<span>Teddy bears:</span>
 			<span id="teddy">0</span>
@@ -102,13 +102,17 @@
 			<span  >Price:</span>
 			<span id="demonteddyPrice">1000000000</span>
 		</div>
-		<div id="tabpage2" class="tabpage">
-			<button>2</button>
+		<div style="display: none;" id="tabpage2" class="tabpage">
+			<button onclick="" style="display: none;" id="shopbtn1">A</button>
+			<button onclick="" style="display: none;" id="shopbtn2">B</button>
+			<button onclick="" style="display: none;" id="shopbtn3">C</button>
+			<button onclick="" style="display: none;" id="shopbtn4">D</button>
+			<button onclick="" style="display: none;" id="shopbtn5">E</button>
 		</div>
-		<div id="tabpage3" class="tabpage">
+		<div style="display: none;" id="tabpage3" class="tabpage">
 			<button>3</button>
 		</div>
-		<div id="tabpage4" class="tabpage">
+		<div style="display: none;" id="tabpage4" class="tabpage">
 			<button>4</button>
 		</div>
 		<button style="background: url(Sprites/rabbit.png) no-repeat; width: 300; height: 300; position: fixed; left: 600; bottom: 150; font-size: 35; font-family: calibri; color: white;" onmousedown="magicClick(1)">Click Me!</button>
@@ -116,6 +120,5 @@
 		<a style="position:fixed; left: 655; bottom: 480;" id="magic">0</a>
 		<span style="position:fixed; left: 600; bottom: 460;">Magic Per Second:</span>
 		<a style="position:fixed; left: 740; bottom: 460;" id="mps">0</a>
-		<script type="text/javascript" src="clicker.js"></script>
 	</body>
 </html>
