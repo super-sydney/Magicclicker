@@ -44,6 +44,10 @@ a, span{
 	border: 3px solid black;
 }
 
+#shopbtn1 button:hover{
+	
+}
+
 .hide{
 	display: none;
 }
