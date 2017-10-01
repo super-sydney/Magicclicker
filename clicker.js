@@ -13,9 +13,7 @@ generators ={
 "dragon" : {amount: 0, mult: 25000}, 
 "phoenix" : {amount: 0, mult: 100000},
 "demonteddy" : {amount: 0, mult: 1000000}
-};
-
-var upgradeLevels = [1, 5, 25, 50, 100, 150, 200, 250, 300], 
+}, upgradeLevels = [1, 5, 25, 50, 100, 150, 200, 250, 300], 
 multiplier = [10, 50, 500, 50000, 5000000, 500000000, 500000000000, 500000000000000, 500000000000000000];
 
 //functions
@@ -44,8 +42,8 @@ function tab(n) {
 }
 
 function magicClick(number){
-    magic = magic + number;
-    document.getElementById("magic").innerHTML = rogueDec(magic);
+    magic += number;
+    document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
 };
 
 function load(){
@@ -107,11 +105,23 @@ function hardReset(){
 	generators.dragon.amount = 0;
 	generators.phoenix.amount = 0;
 	generators.demonteddy.amount = 0;
+	generators.teddy.mult = 0;
+	generators.slime.mult = 0;
+	generators.troll.mult = 0;
+	generators.cookie.mult = 0;
+	generators.bologna.mult = 0;
+	generators.unicorn.mult = 0;
+	generators.lnmonster.mult = 0;
+	generators.bigfoot.mult = 0;
+	generators.nymph.mult = 0;
+	generators.dragon.mult = 0;
+	generators.phoenix.mult = 0;
+	generators.demonteddy.mult = 0;
 	update()
 };
 
 function prestige(){
-	if (window.confirm("Do you want to prestige?\nyou have " + magic + " magic") == true){
+	if (window.confirm("Do you want to prestige?\nyou have " + magic + " magic")){
 		prestige += 0.1;
 		magic = 0;
 		generators.teddy.amount = 0;
@@ -140,53 +150,38 @@ function rogueDec(n){
 	return n;
 }
 
-function buyUpgrade(building,basecost){
-	let a = eval("generators." + building + ".amount;") 
-	let index = upgradeLevels.findIndex(function(n){return n==a});
-	let price = multiplier[index]*basecost;
+function clickShopBtn(number,price,building,basecost){
 	if (magic >= price){
+		document.getElementById(eval('"shopbtn' + number + '"')).style = "display: none;"
+		document.getElementById(eval('"shopbtn' + number + '"')).className = "empty"
 		magic -= price;
-		eval("generators." + building + ".mult *= 2;") 
+		eval("generators." + building + ".mult *= 2;")
 		update();
 	}
 }
 
-function addShopBtn(amountBought,building,basecost){
-	if (document.getElementById("shopbtn1").style = "display: none;"){
-		document.getElementById("shopbtn1").style = "" 
-		document.getElementById("shopbtn1").innerHTML = building
-		document.getElementById("shopbtn1").addEventListener('click',function(){
-			eval("buyUpgrade('" + building + "'," + basecost + ")");
-			document.getElementById("shopbtn1").style = "display: none;"
-			})
-	}else if (document.getElementById("shopbtn2").style = "display: none;"){
-		document.getElementById("shopbtn2").style = "" 
-		document.getElementById("shopbtn2").innerHTML = building
-		document.getElementById("shopbtn2").addEventListener('click',function(){
-			eval("buyUpgrade('" + building + "'," + basecost + ")");
-			document.getElementById("shopbtn2").style = "display: none;"
-			})
-	}else if (document.getElementById("shopbtn3").style = "display: none;"){
-		document.getElementById("shopbtn3").style = ""
-		document.getElementById("shopbtn3").innerHTML = building
-		document.getElementById("shopbtn3").addEventListener('click',function(){
-			eval("buyUpgrade('" + building + "'," + basecost + ")");
-			document.getElementById("shopbtn3").style = "display: none;"
-			})
-	}else if (document.getElementById("shopbtn4").style = "display: none;"){
-		document.getElementById("shopbtn4").style = ""
-		document.getElementById("shopbtn4").innerHTML = building
-		document.getElementById("shopbtn4").addEventListener('click',function(){
-			eval("buyUpgrade('" + building + "'," + basecost + ")");
-			document.getElementById("shopbtn4").style = "display: none;"
-			})
-	}else if (document.getElementById("shopbtn5").style = "display: none;"){
-		document.getElementById("shopbtn5").style = ""
-		document.getElementById("shopbtn5").innerHTML = building
-		document.getElementById("shopbtn5").addEventListener('click',function(){
-			eval("buyUpgrade('" + building + "'," + basecost + ")");
-			document.getElementById("shopbtn5").style = "display: none;"
-			})
+function addShopBtnEvent(number,price,building,basecost){
+	document.getElementById(eval('"shopbtn' + number + '"')).style = "" 
+	document.getElementById(eval('"shopbtn' + number + '"')).className = "used"
+	document.getElementById(eval('"shopbtn' + number + '"')).innerHTML = "Building: " + building + "<br>" + " Cost: " + price
+	document.getElementById(eval('"shopbtn' + number + '"')).removeEventListener('click',clickShopBtn(number,price,building,basecost))
+	document.getElementById(eval('"shopbtn' + number + '"')).addEventListener('click',clickShopBtn(number,price,building,basecost))
+}
+
+function addShopBtn(building,basecost){
+	let a = eval("generators." + building + ".amount;") 
+	let index = upgradeLevels.findIndex(function(n){return n==a});
+	let price = multiplier[index]*basecost;
+	if (document.getElementById("shopbtn1").className == "empty"){
+		addShopBtnEvent(1,price,building,basecost)
+	}else if (document.getElementById("shopbtn2").className == "empty"){
+		addShopBtnEvent(2,price,building,basecost)
+	}else if (document.getElementById("shopbtn3").className == "empty"){
+		addShopBtnEvent(3,price,building,basecost)
+	}else if (document.getElementById("shopbtn4").className == "empty"){
+		addShopBtnEvent(4,price,building,basecost)
+	}else if (document.getElementById("shopbtn5").className == "empty"){
+		addShopBtnEvent(5,price,building,basecost)
 	}
 }
 
@@ -194,13 +189,13 @@ function buyTeddy(){
 	var cost = Math.floor(10*Math.pow(1.1,generators.teddy.amount));
 	if (magic >= cost){
 		magic -= rogueDec(cost);
-		generators.teddy.amount = generators.teddy.amount + 1;
+		++generators.teddy.amount;
 		newCost = Math.floor(10*Math.pow(1.1,generators.teddy.amount));
 		document.getElementById("teddy").innerHTML = generators.teddy.amount;
 		document.getElementById("teddyPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.teddy.amount) >= 0){
-				addShopBtn(generators.teddy.amount,"teddy",10);
+				addShopBtn("teddy",10);
 			}
 		}
 	update()
@@ -210,13 +205,13 @@ function buySlime(){
 	var cost = Math.floor(50*Math.pow(1.1,generators.slime.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.slime.amount = generators.slime.amount + 1;
+		++generators.slime.amount;
 		newCost = Math.floor(50*Math.pow(1.1,generators.slime.amount));
 		document.getElementById("slime").innerHTML = generators.slime.amount;
 		document.getElementById("slimePrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.slime.amount) >= 0){
-				addShopBtn(generators.slime.amount,"slime",50);
+				addShopBtn("slime",50);
 			}
 		update()
 	};
@@ -226,13 +221,13 @@ function buyTroll(){
 	var cost = Math.floor(100*Math.pow(1.1,generators.troll.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.troll.amount = generators.troll.amount + 1;
+		++generators.troll.amount;
 		newCost = Math.floor(100*Math.pow(1.1,troll));
 		document.getElementById("troll").innerHTML = generators.troll.amount;
 		document.getElementById("trollPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.troll.amount) >= 0){
-					addShopBtn(generators.troll.amount,"troll",100);
+					addShopBtn("troll",100);
 				}
 	update()
 	};
@@ -242,13 +237,13 @@ function buyCookie(){
 	var cost = Math.floor(500*Math.pow(1.1,generators.cookie.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.cookie.amount = generators.cookie.amount + 1;
+		++generators.cookie.amount;
 		newCost = Math.floor(500*Math.pow(1.1,cookie));
 		document.getElementById("cookie").innerHTML = generators.cookie.amount;
 		document.getElementById("cookiePrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.cookie.amount) >= 0){
-				addShopBtn(generators.cookie.amount,"cookie",500);
+				addShopBtn("cookie",500);
 			}
 		update()
 	};
@@ -258,13 +253,13 @@ function buyBologna(){
 	var cost = Math.floor(2000*Math.pow(1.1,generators.bologna.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.bologna.amount = generators.bologna.amount + 1;
+		++generators.bologna.amount;
 		newCost = Math.floor(2000*Math.pow(1.1,generators.bologna.amount));
 		document.getElementById("bologna").innerHTML = generators.bologna.amount;
 		document.getElementById("bolognaPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.bologna.amount) >= 0){
-				addShopBtn(generators.bologna.amount,"bologna",2000);
+				addShopBtn("bologna",2000);
 			}
 		update()
 	};
@@ -274,13 +269,13 @@ function buyUnicorn(){
 	var cost = Math.floor(10000*Math.pow(1.1,generators.unicorn.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.unicorn.amount = generators.unicorn.amount + 1;
+		++generators.unicorn.amount;
 		newCost = Math.floor(10000*Math.pow(1.1,generators.unicorn.amount));
 		document.getElementById("unicorn").innerHTML = unicorn;
 		document.getElementById("unicornPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.unicorn.amount) >= 0){
-				addShopBtn(generators.unicorn.amount,"unicorn",10000);
+				addShopBtn("unicorn",10000);
 			}
 		update()
 	};
@@ -290,13 +285,13 @@ function buyLnmonster(){
 	var cost = Math.floor(80000*Math.pow(1.1,generators.lnmonster.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.lnmonster.amount = generators.lnmonster.amount + 1;
+		++generators.lnmonster.amount;
 		newCost = Math.floor(80000*Math.pow(1.1,lnmonster));
 		document.getElementById("lnmonster").innerHTML = generators.lnmonster.amount;
 		document.getElementById("lnmonsterPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.lnmonster.amount) >= 0){
-				addShopBtn(generators.lnmonster.amount,"lnmonster",80000);
+				addShopBtn("lnmonster",80000);
 			}
 		update()
 	};
@@ -306,13 +301,13 @@ function buyBigfoot(){
 	var cost = Math.floor(400000*Math.pow(1.1,generators.bigfoot.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.bigfoot.amount = generators.bigfoot.amount + 1;
+		++generators.bigfoot.amount;
 		newCost = Math.floor(400000*Math.pow(1.1,bigfoot));
 		document.getElementById("bigfoot").innerHTML = generators.bigfoot.amount;
 		document.getElementById("bigfootPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.bigfoot.amount) >= 0){
-				addShopBtn(generators.bigfoot.amount,"bigfoot",400000);
+				addShopBtn("bigfoot",400000);
 			}
 		update()
 	};
@@ -322,13 +317,13 @@ function buyNymph(){
 	var cost = Math.floor(1666666*Math.pow(1.1,generators.nymph.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.nymph.amount = generators.nymph.amount + 1;
+		++generators.nymph.amount;
 		newCost = Math.floor(1666666*Math.pow(1.1,nymph));
 		document.getElementById("nymph").innerHTML = generators.nymph.amount;
 		document.getElementById("nymphPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.nymph.amount) >= 0){
-				addShopBtn(generators.nymph.amount,"nymph",1666666);
+				addShopBtn("nymph",1666666);
 			}
 		update()
 	};
@@ -338,13 +333,13 @@ function buyDragon(){
 	var cost = Math.floor(1000000*Math.pow(1.1,generators.dragon.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.dragon.amount = generators.dragon.amount + 1;
+		++generators.dragon.amount;
 		newCost = Math.floor(10000000*Math.pow(1.1,dragon));
 		document.getElementById("dragon").innerHTML = generators.dragon.amount;
 		document.getElementById("dragonPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.dragon.amount) >= 0){
-				addShopBtn(generators.dragon.amount,"dragon",10000000);
+				addShopBtn("dragon",10000000);
 			}
 		update()
 	};
@@ -354,13 +349,13 @@ function buyPhoenix(){
 	var cost = Math.floor(55000000*Math.pow(1.1,generators.phoenix.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.phoenix.amount = generators.phoenix.amount + 1;
+		++generators.phoenix.amount;
 		newCost = Math.floor(55000000*Math.pow(1.1,generators.phoenix.amount));
 		document.getElementById("phoenix").innerHTML = generators.phoenix.amount;
 		document.getElementById("phoenixPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.phoenix.amount) >= 0){
-				addShopBtn(generators.phoenix.amount,"phoenix",55000000);
+				addShopBtn("phoenix",55000000);
 			}
 		update()
 	};
@@ -370,13 +365,13 @@ function buyDemonteddy(){
 	var cost = Math.floor(1000000000*Math.pow(1.1,generators.demonteddy.amount));
 	if (magic >= cost){
 		magic -= cost;
-		generators.demonteddy.amount = generators.demonteddy.amount + 1;
+		++generators.demonteddy.amount;
 		newCost = Math.floor(1000000000*Math.pow(1.1,generators.demonteddy.amount));
 		document.getElementById("demonteddy").innerHTML = generators.demonteddy.amount;
 		document.getElementById("demonteddyPrice").innerHTML = rogueDec(newCost);
 		document.getElementById("magic").innerHTML = rogueDec(magic);
 		if (upgradeLevels.indexOf(generators.demonteddy.amount) >= 0){
-				addShopBtn(generators.demonteddy.amount,"demonteddy",50);
+				addShopBtn("demonteddy",1000000000);
 			}
 		update()
 	};
