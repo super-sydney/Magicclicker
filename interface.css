@@ -30,6 +30,13 @@ a, span{
     float: left;
 }
 
+.used button{
+	color: blue;
+	font-family: "Comic Sans MS";
+	border: pink;
+	background-color: red;
+}
+
 .btn-group button:not(:last-child){
     border-right: none;
 }
