@@ -21,7 +21,6 @@ a, span{
 
 .btn-group button{
 	background-size: 50px 50px;
-	background-image: url(Sprites/tab1);
 	width: 75;
 	height: 75;
     border: 2px solid black; 
