@@ -393,7 +393,7 @@ function abbreviateNumber(value) {
 			var suffixes = ["", "k", "m", "b","t","q","Q","s","S"];
 			var suffixNum = Math.floor( (""+value).length/3 );
 			var shortValue = '';
-			for (var precision = 2; precision >= 1; precision--) {
+			for (var precision = 3; precision >= 3; precision--) {
 				shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
 				var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
 				if (dotLessShortValue.length <= 2) { break; }
@@ -402,20 +402,20 @@ function abbreviateNumber(value) {
 			newValue = shortValue+suffixes[suffixNum];
 		}
 		return newValue;
+	}else if (numberType == 1){
+		return value.toExponential(2)
+	}else if (numberType == 2){
+		return value;
 	}
-}else if (numberType == 1){
-	return value;
-}else if (numberType == 2){
-	return value;
 }
 
 function numberTypeChange(){
 	if (numberType == 0){
 		++numberType;
-		document.getElementById("nmrtype").innerHTML = "Scientific notation"
+		document.getElementById("nmrtype").innerHTML = "Scientific Notation"
 	}else if (numberType == 1){
 		++numberType;
-		document.getElementById("nmrtype").innerHTML = "Notation"
+		document.getElementById("nmrtype").innerHTML = "Full Number"
 	}else if (numberType == 2){
 		numberType = 0;
 		document.getElementById("nmrtype").innerHTML = "Shortened Notation"
@@ -448,4 +448,5 @@ function update(){
 	document.getElementById("nymphPrice").innerHTML = abbreviateNumber(Math.floor(1666666*Math.pow(1.1,generators.nymph.amount)))
 	document.getElementById("dragonPrice").innerHTML = abbreviateNumber(Math.floor(10000000*Math.pow(1.1,generators.dragon.amount)))
 	document.getElementById("phoenixPrice").innerHTML = abbreviateNumber(Math.floor(55000000*Math.pow(1.1,generators.phoenix.amount)))
-	document.getElementById("demonteddyPrice").innerHTML = abbreviateNumber(Math.floor(1000000000*Math.pow(1.1,generators.demonteddy.amount)))}
+	document.getElementById("demonteddyPrice").innerHTML = abbreviateNumber(Math.floor(1000000000*Math.pow(1.1,generators.demonteddy.amount)))
+}
