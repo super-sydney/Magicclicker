@@ -1,5 +1,5 @@
 ///setup
-var prestige = 0, magicAllTime = 0, magic = 0,
+var prestige = 0, magicAllTime = 0, magic = 0, numberType = 0,
 generators ={
 "teddy":{amount: 0, mult: 0.1},
 "slime":{amount: 0, mult: 0.5},
@@ -387,20 +387,39 @@ window.setInterval(function(){
 }, 10000);
 
 function abbreviateNumber(value) {
-    var newValue = value;
-    if (value >= 1000) {
-        var suffixes = ["", "k", "m", "b","t","q","Q","s","S"];
-        var suffixNum = Math.floor( (""+value).length/3 );
-        var shortValue = '';
-        for (var precision = 2; precision >= 1; precision--) {
-            shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
-            var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
-            if (dotLessShortValue.length <= 2) { break; }
-        }
-        if (shortValue % 1 != 0)  shortNum = shortValue.toFixed(1);
-        newValue = shortValue+suffixes[suffixNum];
-    }
-    return newValue;
+	if (numberType == 0){
+		var newValue = value;
+		if (value >= 1000) {
+			var suffixes = ["", "k", "m", "b","t","q","Q","s","S"];
+			var suffixNum = Math.floor( (""+value).length/3 );
+			var shortValue = '';
+			for (var precision = 2; precision >= 1; precision--) {
+				shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
+				var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+				if (dotLessShortValue.length <= 2) { break; }
+			}
+			if (shortValue % 1 != 0)  shortNum = shortValue.toFixed(1);
+			newValue = shortValue+suffixes[suffixNum];
+		}
+		return newValue;
+	}
+}else if (numberType == 1){
+	return value;
+}else if (numberType == 2){
+	return value;
+}
+
+function numberTypeChange(){
+	if (numberType == 0){
+		++numberType;
+		document.getElementById("nmrtype).innerHTML = "Scientific notation";
+	}else if (numberType == 1){
+		++numberType;
+		document.getElementById("nmrtype).innerHTML = "Notation";
+	}else if (numberType == 2){
+		numberType = 0;
+		document.getElementById("nmrtype).innerHTML = "Shortened Notation";
+	}
 }
 
 function update(){
