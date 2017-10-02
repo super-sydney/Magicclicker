@@ -412,13 +412,13 @@ function abbreviateNumber(value) {
 function numberTypeChange(){
 	if (numberType == 0){
 		++numberType;
-		document.getElementById("nmrtype).innerHTML = "Scientific notation";
+		document.getElementById("nmrtype).innerHTML = "Scientific notation"
 	}else if (numberType == 1){
 		++numberType;
-		document.getElementById("nmrtype).innerHTML = "Notation";
+		document.getElementById("nmrtype).innerHTML = "Notation"
 	}else if (numberType == 2){
 		numberType = 0;
-		document.getElementById("nmrtype).innerHTML = "Shortened Notation";
+		document.getElementById("nmrtype).innerHTML = "Shortened Notation"
 	}
 }
 
