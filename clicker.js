@@ -19,7 +19,7 @@ multiplier = [10, 50, 500, 50000, 5000000, 500000000, 500000000000, 500000000000
 //functions
 function tab(n) {
    	if (n == 1){
-		document.getElementById("tabpage1").style = ""
+		document.getElementById("tabpage1").style = "height: 75%; width: 58%; background-color: black; background-blend-mode: color-dodge; opacity: 0.5; overflow-y: scroll; border: 5px solid black"
 		document.getElementById("tabpage2").style = "display: none;"
 		document.getElementById("tabpage3").style = "display: none;"
 		document.getElementById("tabpage4").style = "display: none;"
@@ -46,11 +46,42 @@ function magicClick(number){
     document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
 };
 
+function save(){
+	var save ={
+		magicAllTime: magicAllTime,
+		magic: magic,
+		teddy: generators.teddy.amount,
+		slime: generators.slime.amount,
+		troll: generators.troll.amount,
+		cookie: generators.cookie.amount,
+		bologna: generators.bologna.amount,
+		unicorn: generators.unicorn.amount,
+		lnmonster: generators.lnmonster.amount,
+		bigfoot: generators.bigfoot.amount,
+		nymph: generators.nymph.amount,
+		dragon: generators.dragon.amount,
+		phoenix: generators.phoenix.amount,
+		demonteddy: generators.demonteddy.amount,
+		teddymult: generators.teddy.mult,
+		slimemult: generators.slime.mult,
+		trollmult: generators.troll.mult,
+		cookiemult: generators.cookie.mult,
+		bolognamult: generators.bologna.mult,
+		unicornmult: generators.unicorn.mult,
+		lnmonstermult: generators.lnmonster.mult,
+		bigfootmult: generators.bigfoot.mult,
+		nymphmult: generators.nymph.mult,
+		dragonmult: generators.dragon.mult,
+		pheonixmult: generators.phoenix.mult,
+		demonteddymult: generators.demonteddy.mult
+	}
+localStorage.setItem("save",JSON.stringify(save));
+}
+
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("save"));
-	if (typeof savegame.magic !== "undefined"){
+	if (typeof savegame.magic !== undefined){
 		magicAllTime = savegame.magicAllTime
-		mps = savegame.mps
 		magic = savegame.magic
 		generators.teddy.amount = savegame.teddy
 		generators.slime.amount = savegame.slime
@@ -64,31 +95,21 @@ function load(){
 		generators.dragon.amount = savegame.dragon
 		generators.phoenix.amount = savegame.phoenix
 		generators.demonteddy.amount = savegame.demonteddy
+		generators.teddy.mult = savegame.teddymult
+		generators.slime.mult = savegame.slimemult
+		generators.troll.mult = savegame.trollmult
+		generators.cookie.mult = savegame.cookiemult
+		generators.bologna.mult = savegame.bolognamult
+		generators.unicorn.mult = savegame.unicornmult
+		generators.lnmonster.mult = savegame.lnmonstermult
+		generators.bigfoot.mult = savegame.bigfootmult
+		generators.nymph.mult = savegame.nymphmult
+		generators.dragon.mult = savegame.dragonmult
+		generators.phoenix.mult = savegame.phoenixmult
+		generators.demonteddy.mult = savegame.demonteddymult
 		update()
 	}
 }
-
-function save(){
-	var save ={
-		magicAllTime: magicAllTime,
-		mps: mps,
-		magic: magic,
-		teddy: generators.teddy.amount,
-		slime: generators.slime.amount,
-		troll: generators.troll.amount,
-		cookie: generators.cookie.amount,
-		bologna: generators.bologna.amount,
-		unicorn: generators.unicorn.amount,
-		lnmonster: generators.lnmonster.amount,
-		bigfoot: generators.bigfoot.amount,
-		nymph: generators.nymph.amount,
-		dragon: generators.dragon.amount,
-		phoenix: generators.phoenix.amount,
-		demonteddy: generators.demonteddy.amount
-	}
-localStorage.setItem("save",JSON.stringify(save));
-}
-
 
 function hardReset(){
 	localStorage.removeItem("save");
