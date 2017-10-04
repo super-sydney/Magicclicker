@@ -1,18 +1,18 @@
 ///setup
-var prestige = 0, magicAllTime = 0, magic = 0, numberType = 0,
+var prestige = 0, magic = 0, numberType = 0,
 generators ={
-"teddy":{amount: 0, mult: 0.1},
-"slime":{amount: 0, mult: 0.5},
-"troll":{amount: 0, mult: 2},
-"cookie" :{amount: 0, mult: 5},
-"bologna" : {amount: 0, mult: 15}, 
-"unicorn" : {amount: 0, mult: 50},
-"lnmonster" : {amount: 0, mult: 250}, 
-"bigfoot" : {amount: 0, mult: 1000},
-"nymph" : {amount: 0, mult: 5000},
-"dragon" : {amount: 0, mult: 25000}, 
-"phoenix" : {amount: 0, mult: 100000},
-"demonteddy" : {amount: 0, mult: 1000000}
+teddy:{amount: 0, mult: 0.1},
+slime:{amount: 0, mult: 0.5},
+troll:{amount: 0, mult: 2},
+cookie :{amount: 0, mult: 5},
+bologna : {amount: 0, mult: 15}, 
+unicorn : {amount: 0, mult: 50},
+lnmonster : {amount: 0, mult: 250}, 
+bigfoot : {amount: 0, mult: 1000},
+nymph : {amount: 0, mult: 5000},
+dragon : {amount: 0, mult: 25000}, 
+phoenix : {amount: 0, mult: 100000},
+demonteddy : {amount: 0, mult: 1000000}
 }, upgradeLevels = [1, 5, 25, 50, 100, 150, 200, 250, 300], 
 multiplier = [10, 50, 500, 50000, 5000000, 500000000, 500000000000, 500000000000000, 500000000000000000];
 
@@ -46,9 +46,39 @@ function magicClick(number){
     document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
 };
 
+function load(){
+	let savegame = JSON.parse(localStorage.getItem("save"));
+	if (typeof savegame.magic !== "undefined"){
+		magic = savegame.magic;
+		generators.teddy.amount = savegame.teddy;
+		generators.slime.amount = savegame.slime;
+		generators.troll.amount = savegame.troll;
+		generators.cookie.amount = savegame.cookie;
+		generators.bologna.amount = savegame.bologna;
+		generators.unicorn.amount = savegame.unicorn;
+		generators.lnmonster.amount = savegame.lnmonster;
+		generators.bigfoot.amount = savegame.bigfoot;
+		generators.nymph.amount = savegame.nymph;
+		generators.dragon.amount = savegame.dragon;
+		generators.phoenix.amount = savegame.phoenix;
+		generators.demonteddy.amount = savegame.demonteddy;
+		generators.teddy.mult = savegame.teddymult;
+		generators.slime.mult = savegame.slimemult;
+		generators.troll.mult = savegame.trollmult;
+		generators.cookie.mult = savegame.cookiemult;
+		generators.bologna.mult = savegame.bolognamult;
+		generators.unicorn.mult = savegame.unicornmult;
+		generators.lnmonster.mult = savegame.lnmonstermult;
+		generators.bigfoot.mult = savegame.bigfootmult;
+		generators.nymph.mult = savegame.nymphmult;
+		generators.dragon.mult = savegame.dragonmult;
+		generators.phoenix.mult = savegame.phoenixmult;
+		generators.demonteddy.mult = savegame.demonteddymult;
+	}
+}
+
 function save(){
 	var save ={
-		magicAllTime: magicAllTime,
 		magic: magic,
 		teddy: generators.teddy.amount,
 		slime: generators.slime.amount,
@@ -76,39 +106,6 @@ function save(){
 		demonteddymult: generators.demonteddy.mult
 	}
 localStorage.setItem("save",JSON.stringify(save));
-}
-
-function load(){
-	var savegame = JSON.parse(localStorage.getItem("save"));
-	if (typeof savegame.magic !== undefined){
-		magicAllTime = savegame.magicAllTime
-		magic = savegame.magic
-		generators.teddy.amount = savegame.teddy
-		generators.slime.amount = savegame.slime
-		generators.troll.amount = savegame.troll
-		generators.cookie.amount = savegame.cookie
-		generators.bologna.amount = savegame.bologna
-		generators.unicorn.amount = savegame.unicorn
-		generators.lnmonster.amount = savegame.lnmonster
-		generators.bigfoot.amount = savegame.bigfoot
-		generators.nymph.amount = savegame.nymph
-		generators.dragon.amount = savegame.dragon
-		generators.phoenix.amount = savegame.phoenix
-		generators.demonteddy.amount = savegame.demonteddy
-		generators.teddy.mult = savegame.teddymult
-		generators.slime.mult = savegame.slimemult
-		generators.troll.mult = savegame.trollmult
-		generators.cookie.mult = savegame.cookiemult
-		generators.bologna.mult = savegame.bolognamult
-		generators.unicorn.mult = savegame.unicornmult
-		generators.lnmonster.mult = savegame.lnmonstermult
-		generators.bigfoot.mult = savegame.bigfootmult
-		generators.nymph.mult = savegame.nymphmult
-		generators.dragon.mult = savegame.dragonmult
-		generators.phoenix.mult = savegame.phoenixmult
-		generators.demonteddy.mult = savegame.demonteddymult
-		update()
-	}
 }
 
 function hardReset(){
