@@ -28,6 +28,7 @@ function tab(n) {
 		document.getElementById("tabpage2").style = "";
 		document.getElementById("tabpage3").style = "display: none;";
 		document.getElementById("tabpage4").style = "display: none;";
+		document.getElementById("tabbtn2").style = "background-color: white;";
 	}else if (n == 3){
 		document.getElementById("tabpage1").style = "display: none;";
 		document.getElementById("tabpage2").style = "display: none;";
@@ -185,6 +186,26 @@ function hardReset(){
 	generators.dragon.mult = 0;
 	generators.phoenix.mult = 0;
 	generators.demonteddy.mult = 0;
+	document.getElementById("shopbtn1").innerHTML = "A";
+	document.getElementById("shopbtn1").className = "empty";
+	document.getElementById("shopbtn1").style = "display: none;";
+	document.getElementById("shopbtn1").onmousedown = "";
+	document.getElementById("shopbtn2").innerHTML = "B";
+	document.getElementById("shopbtn2").className = "empty";
+	document.getElementById("shopbtn2").style = "display: none;";
+	document.getElementById("shopbtn2").onmousedown = "";
+	document.getElementById("shopbtn3").innerHTML = "C";
+	document.getElementById("shopbtn3").className = "empty";
+	document.getElementById("shopbtn3").style = "display: none;";
+	document.getElementById("shopbtn3").onmousedown = "";
+	document.getElementById("shopbtn4").innerHTML = "D";
+	document.getElementById("shopbtn4").className = "empty";
+	document.getElementById("shopbtn4").style = "display: none;";
+	document.getElementById("shopbtn4").onmousedown = "";
+	document.getElementById("shopbtn5").innerHTML = "E";
+	document.getElementById("shopbtn5").className = "empty";
+	document.getElementById("shopbtn5").style = "display: none;";
+	document.getElementById("shopbtn5").onmousedown = "";
 	update();
 }
 
@@ -217,7 +238,7 @@ function rogueDec(n){
 	return n;
 }
 
-function clickShopBtn(number,price,building,basecost){
+function clickShopBtn(number,price,building){
 	if (magic >= price){
 		document.getElementById(eval('"shopbtn' + number + '"')).style = "display: none;";
 		document.getElementById(eval('"shopbtn' + number + '"')).className = "empty";
@@ -232,7 +253,8 @@ function addShopBtnEvent(number,price,building,basecost){
 	document.getElementById(eval('"shopbtn' + number + '"')).style = "" ;
 	document.getElementById(eval('"shopbtn' + number + '"')).className = "used";
 	document.getElementById(eval('"shopbtn' + number + '"')).innerHTML = "Building: " + building + "<br>" + " Cost: " + price;
-	document.getElementById(eval('"shopbtn' + number + '"')).onmousedown = "clickShopBtn(number,price,building,cost);";
+	document.getElementById(eval('"shopbtn' + number + '"')).onmousedown = eval('"clickShopBtn(' + number + "," + price + "," + building + ')"'); //not working
+	document.getElementById("tabbtn2").style = "background-color: yellow";
 }
 
 function addShopBtn(building,basecost){
