@@ -101,27 +101,32 @@ function save(){
 
 function load(){
 	let savegame = JSON.parse(localStorage.getItem("save"));
-	if (typeof savegame.magic !== "undefined"){
+	if (typeof savegame.shopbtn1 !== "undefined"){
 		document.getElementById("shopbtn1").innerHTML = savegame.shopbtn1;
 		document.getElementById("shopbtn1").style = savegame.shopbtn1style;
 		document.getElementById("shopbtn1").className = savegame.shopbtn1class;
 		document.getElementById("shopbtn1").onmousedown = savegame.shopbtn1mousedown;
+	}if (typeof savegame.shopbtn2 !== "undefined"){
 		document.getElementById("shopbtn2").innerHTML = savegame.shopbtn2;
 		document.getElementById("shopbtn2").style = savegame.shopbtn2style;
 		document.getElementById("shopbtn2").className = savegame.shopbtn2class;
 		document.getElementById("shopbtn2").onmousedown = savegame.shopbtn2mousedown;
+	}if (typeof savegame.shopbtn3 !== "undefined"){
 		document.getElementById("shopbtn3").innerHTML = savegame.shopbtn3;
 		document.getElementById("shopbtn3").style = savegame.shopbtn3style;
 		document.getElementById("shopbtn3").className = savegame.shopbtn3class;
 		document.getElementById("shopbtn3").onmousedown = savegame.shopbtn3mousedown;
+	}if (typeof savegame.shopbtn4 !== "undefined"){
 		document.getElementById("shopbtn4").innerHTML = savegame.shopbtn4;
 		document.getElementById("shopbtn4").style = savegame.shopbtn4style;
 		document.getElementById("shopbtn4").className = savegame.shopbtn4class;
 		document.getElementById("shopbtn4").onmousedown = savegame.shopbtn4mousedown;
+	}if (typeof savegame.shopbtn5 !== "undefined"){
 		document.getElementById("shopbtn5").innerHTML = savegame.shopbtn5;
 		document.getElementById("shopbtn5").style = savegame.shopbtn5style;
 		document.getElementById("shopbtn5").className = savegame.shopbtn5class;
 		document.getElementById("shopbtn5").onmousedown = savegame.shopbtn5mousedown;
+	}if (typeof savegame.magic !== "undefined"){
 		magic = savegame.magic;
 		generators.teddy.amount = savegame.teddy;
 		generators.slime.amount = savegame.slime;
