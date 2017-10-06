@@ -101,7 +101,7 @@ function save(){
 }
 
 function load(){
-	let savegame = JSON.parse(localStorage.getItem("save"));
+	var savegame = JSON.parse(localStorage.getItem("save"));
 	if (typeof savegame.shopbtn1 !== "undefined"){
 		document.getElementById("shopbtn1").innerHTML = savegame.shopbtn1;
 		document.getElementById("shopbtn1").style = savegame.shopbtn1style;
@@ -240,9 +240,9 @@ function rogueDec(n){
 
 function clickShopBtn(number,price,building){
 	if (magic >= price){
-		document.getElementById(eval('"shopbtn' + number + '"')).style = "display: none;";
-		document.getElementById(eval('"shopbtn' + number + '"')).className = "empty";
-		document.getElementById(eval('"shopbtn' + number + '"')).onmousedown ="";
+		document.getElementById("shopbtn" + number).style = "display: none;";
+		document.getElementById("shopbtn" + number).className = "empty";
+		document.getElementById("shopbtn" + number).onmousedown ="";
 		magic -= price;
 		eval("generators." + building + ".mult *= 2;");
 		update();
@@ -250,17 +250,17 @@ function clickShopBtn(number,price,building){
 }
 
 function addShopBtnEvent(number,price,building,basecost){
-	document.getElementById(eval('"shopbtn' + number + '"')).style = "" ;
-	document.getElementById(eval('"shopbtn' + number + '"')).className = "used";
-	document.getElementById(eval('"shopbtn' + number + '"')).innerHTML = "Building: " + building + "<br>" + " Cost: " + price;
-	document.getElementById(eval('"shopbtn' + number + '"')).onmousedown = eval('"clickShopBtn(' + number + "," + price + "," + building + ')"'); //not working
+	document.getElementById("shopbtn" + number).style = "" ;
+	document.getElementById("shopbtn" + number).className = "used";
+	document.getElementById("shopbtn" + number).innerHTML = "Building: " + building + "<br>" + " Cost: " + price;
+	document.getElementById("shopbtn" + number).onclick = "clickShopBtn(" + number + "," + price + "," + building + ")";
 	document.getElementById("tabbtn2").style = "background-color: yellow";
 }
 
 function addShopBtn(building,basecost){
-	let a = eval("generators." + building + ".amount;"); 
-	let index = upgradeLevels.findIndex(function(n){return n==a});
-	let price = multiplier[index]*basecost;
+	var a = eval("generators." + building + ".amount;"); 
+	var index = upgradeLevels.findIndex(function(n){return n==a;});
+	var price = multiplier[index]*basecost;
 	if (document.getElementById("shopbtn1").className == "empty"){
 		addShopBtnEvent(1,price,building,basecost);
 	}else if (document.getElementById("shopbtn2").className == "empty"){
@@ -271,6 +271,8 @@ function addShopBtn(building,basecost){
 		addShopBtnEvent(4,price,building,basecost);
 	}else if (document.getElementById("shopbtn5").className == "empty"){
 		addShopBtnEvent(5,price,building,basecost);
+	}else if (document.getElementById("shopbtn6").className == "empty"){
+		addShopBtnEvent(6,price,building,basecost);
 	}
 }
 
