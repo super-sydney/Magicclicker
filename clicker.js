@@ -49,32 +49,26 @@ function magicClick(number){
 function save(){
 	var save ={
 		shopbtn1: document.getElementById("shopbtn1").innerHTML,
-		shopbtn1mousedown: document.getElementById("shopbtn1").onmousedown,
 		shopbtn1style: document.getElementById("shopbtn1").style,
 		shopbtn1class: document.getElementById("shopbtn1").className,
 		shopbtn1event: shopbtn1event,
 		shopbtn2: document.getElementById("shopbtn2").innerHTML,
-		shopbtn2mousedown: document.getElementById("shopbtn2").onmousedown,
 		shopbtn2style: document.getElementById("shopbtn2").style,
 		shopbtn2class: document.getElementById("shopbtn2").className,
 		shopbtn2event: shopbtn2event,
 		shopbtn3: document.getElementById("shopbtn3").innerHTML,
-		shopbtn3mousedown: document.getElementById("shopbtn3").onmousedown,
 		shopbtn3style: document.getElementById("shopbtn3").style,
 		shopbtn3class: document.getElementById("shopbtn3").className,
 		shopbtn3event: shopbtn3event,
 		shopbtn4: document.getElementById("shopbtn4").innerHTML,
-		shopbtn4mousedown: document.getElementById("shopbtn4").onmousedown,
 		shopbtn4style: document.getElementById("shopbtn4").style,
 		shopbtn4class: document.getElementById("shopbtn4").className,
 		shopbtn4event: shopbtn4event,
 		shopbtn5: document.getElementById("shopbtn5").innerHTML,
-		shopbtn5mousedown: document.getElementById("shopbtn5").onmousedown,
 		shopbtn5style: document.getElementById("shopbtn5").style,
 		shopbtn5class: document.getElementById("shopbtn5").className,
 		shopbtn5event: shopbtn5event,
 		shopbtn6: document.getElementById("shopbtn6").innerHTML,
-		shopbtn6mousedown: document.getElementById("shopbtn6").onmousedown,
 		shopbtn6style: document.getElementById("shopbtn6").style,
 		shopbtn6class: document.getElementById("shopbtn6").className,
 		shopbtn6event: shopbtn6event,
@@ -119,31 +113,26 @@ function load(){
 		document.getElementById("shopbtn2").innerHTML = savegame.shopbtn2;
 		document.getElementById("shopbtn2").style = savegame.shopbtn2style;
 		document.getElementById("shopbtn2").className = savegame.shopbtn2class;
-		document.getElementById("shopbtn2").onmousedown = savegame.shopbtn2mousedown;
 		eval(savegame.shopbtn2event);
 	}if (typeof savegame.shopbtn3 !== "undefined"){
 		document.getElementById("shopbtn3").innerHTML = savegame.shopbtn3;
 		document.getElementById("shopbtn3").style = savegame.shopbtn3style;
 		document.getElementById("shopbtn3").className = savegame.shopbtn3class;
-		document.getElementById("shopbtn3").onmousedown = savegame.shopbtn3mousedown;
 		eval(savegame.shopbtn3event);
 	}if (typeof savegame.shopbtn4 !== "undefined"){
 		document.getElementById("shopbtn4").innerHTML = savegame.shopbtn4;
 		document.getElementById("shopbtn4").style = savegame.shopbtn4style;
 		document.getElementById("shopbtn4").className = savegame.shopbtn4class;
-		document.getElementById("shopbtn4").onmousedown = savegame.shopbtn4mousedown;
 		eval(savegame.shopbtn4event);
 	}if (typeof savegame.shopbtn5 !== "undefined"){
 		document.getElementById("shopbtn5").innerHTML = savegame.shopbtn5;
 		document.getElementById("shopbtn5").style = savegame.shopbtn5style;
 		document.getElementById("shopbtn5").className = savegame.shopbtn5class;
-		document.getElementById("shopbtn5").onmousedown = savegame.shopbtn5mousedown;
 		eval(savegame.shopbtn5event);
 	}if (typeof savegame.shopbtn6 !== "undefined"){
 		document.getElementById("shopbtn6").innerHTML = savegame.shopbtn6;
 		document.getElementById("shopbtn6").style = savegame.shopbtn6style;
 		document.getElementById("shopbtn6").className = savegame.shopbtn6class;
-		document.getElementById("shopbtn6").onmousedown = savegame.shopbtn6mousedown;
 		eval(savegame.shopbtn6event);
 	}if (typeof savegame.magic !== "undefined"){
 		magic = savegame.magic;
@@ -171,6 +160,7 @@ function load(){
 		generators.dragon.mult = savegame.dragonmult;
 		generators.phoenix.mult = savegame.phoenixmult;
 		generators.demonteddy.mult = savegame.demonteddymult;
+		invisBtn(1);
 		update();
 	}
 }
@@ -217,9 +207,9 @@ function hardReset(){
 	document.getElementById("shopbtn5").innerHTML = "E";
 	document.getElementById("shopbtn5").className = "empty";
 	document.getElementById("shopbtn5").style = "display: none;";
-	document.getElementById("shopbtn5").innerHTML = "F";
-	document.getElementById("shopbtn5").className = "empty";
-	document.getElementById("shopbtn5").style = "display: none;";
+	document.getElementById("shopbtn6").innerHTML = "F";
+	document.getElementById("shopbtn6").className = "empty";
+	document.getElementById("shopbtn6").style = "display: none;";
 	update();
 }
 
@@ -260,7 +250,21 @@ function clickShopBtn(number,price,building){
 		magic -= price;
 		document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
 		eval("generators." + building + ".mult *= 2;");
+		if (number == 1){
+			shopbtn1event = null;
+		}else if (number == 2){
+			shopbtn2event = null;
+		}else if (number == 3){
+			shopbtn3event = null;
+		}else if (number == 4){
+			shopbtn4event = null;
+		}else if (number == 5){
+			shopbtn5event = null;
+		}else if (number == 6){
+			shopbtn6event = null;
+		}
 		update();
+		save();
 	}
 }
 
@@ -268,19 +272,19 @@ function addShopBtnEvent(number,price,building,basecost){
 	document.getElementById("shopbtn" + number).style = "";
 	document.getElementById("shopbtn" + number).className = "used";
 	document.getElementById("shopbtn" + number).innerHTML = "Building: " + building + "<br>" + " Cost: " + price;
-	document.getElementById("shopbtn" + number).addEventListener('click',function(){clickShopBtn(number,price,building);});
+	document.getElementById("shopbtn" + number).addEventListener('click',function(){clickShopBtn(number,price,building);}, {once: true});
 	if (number == 1){
-		shopbtn1event = "document.getElementById('shopbtn1').addEventListener('click',function(){clickShopBtn(1," + price + "," + building + ");});";
+		shopbtn1event = "document.getElementById('shopbtn1').addEventListener('click',function(){clickShopBtn(1," + price + "," + building + ");}, {once: true});";
 	}else if (number == 2){
-		shopbtn2event = "document.getElementById('shopbtn2').addEventListener('click',function(){clickShopBtn(2," + price + "," + building + ");});";
+		shopbtn2event = "document.getElementById('shopbtn2').addEventListener('click',function(){clickShopBtn(2," + price + "," + building + ");}, {once: true});";
 	}else if (number == 3){
-		shopbtn3event = "document.getElementById('shopbtn3').addEventListener('click',function(){clickShopBtn(3," + price + "," + building + ");});";
+		shopbtn3event = "document.getElementById('shopbtn3').addEventListener('click',function(){clickShopBtn(3," + price + "," + building + ");}, {once: true});";
 	}else if (number == 4){
-		shopbtn4event = "document.getElementById('shopbtn4').addEventListener('click',function(){clickShopBtn(4," + price + "," + building + ");});";
+		shopbtn4event = "document.getElementById('shopbtn4').addEventListener('click',function(){clickShopBtn(4," + price + "," + building + ");}, {once: true});";
 	}else if (number == 5){
-		shopbtn5event = "document.getElementById('shopbtn5').addEventListener('click',function(){clickShopBtn(5," + price + "," + building + ");});";
+		shopbtn5event = "document.getElementById('shopbtn5').addEventListener('click',function(){clickShopBtn(5," + price + "," + building + ");}, {once: true});";
 	}else if (number == 6){
-		shopbtn6event = "document.getElementById('shopbtn6').addEventListener('click',function(){clickShopBtn(6," + price + "," + building + ");});";
+		shopbtn6event = "document.getElementById('shopbtn6').addEventListener('click',function(){clickShopBtn(6," + price + "," + building + ");}, {once: true});";
 	}
 	document.getElementById("tabbtn2").style = "background-color: yellow";
 }
@@ -392,6 +396,13 @@ function numberTypeChange(){
 	}else if (numberType == 2){
 		numberType = 0;
 		document.getElementById("nmrtype").innerHTML = "Shortened Notation";
+	}
+}
+
+function invisBtn(i){
+	if ((i <= 6) && (document.getElementById("shopbtn" + i).classList.contains("empty"))){
+		 document.getElementById("shopbtn" + i).style = "display: none;";
+		 invisBtn(++i);
 	}
 }
 
