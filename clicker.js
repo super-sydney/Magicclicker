@@ -1,4 +1,4 @@
-var magicAllTime = 0, magic = 0, numberType = 0, shopbtn1event = null, shopbtn2event = null, shopbtn3event = null, shopbtn4event = null, shopbtn5event = null, shopbtn6event = null,
+var magicAllTime = 0, magic = 0, numberType = 0, clickPower = 1, index = 1, shopbtn1event = null, shopbtn2event = null, shopbtn3event = null, shopbtn4event = null, shopbtn5event = null, shopbtn6event = null,
 generators ={
 	"teddy": {amount: 0, mult: 0.1},
 	"slime": {amount: 0, mult: 0.5},
@@ -13,7 +13,9 @@ generators ={
 	"phoenix": {amount: 0, mult: 100000},
 	"demonteddy": {amount: 0, mult: 1000000}
 }, upgradeLevels = [1, 5, 25, 50, 100, 150, 200, 250, 300], 
-multiplier = [10, 50, 500, 50000, 5000000, 500000000, 500000000000, 500000000000000, 500000000000000000];
+multiplier = [10, 50, 500, 50000, 5000000, 500000000, 500000000000, 500000000000000, 500000000000000000],
+prices = [10, 50, 100, 500, 2000, 10000, 80000, 400000, 1666666, 10000000, 55000000, 1000000000],
+gen = ["teddy", "slime", "troll", "cookie", "bologna", "unicorn", "lnmonster", "bigfoot", "nymph", "dragon", "phoenix", "demonteddy"];
 
 //functions
 function tab(n) {
@@ -41,9 +43,12 @@ function tab(n) {
 	}
 }
 
-function magicClick(number){
-    magic += number;
+function magicClick(){
+    magic += clickPower;
     document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
+    if ((magic >= 100) && (index == 1)){
+    	++index;
+    }
 }
 
 function save(){
@@ -277,7 +282,31 @@ function clickShopBtn(number,price,building){
 		document.getElementById("shopbtn" + number).onmousedown ="";
 		magic -= price;
 		document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
-		eval("generators." + building + ".mult *= 2;");
+		if (building == "teddy"){
+			generators.teddy.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}else if (building == "troll"){
+			generators.troll.mult *= 2;
+		}else if (building == "cookie"){
+			generators.cookie.mult *= 2;
+		}else if (building == "bologna"){
+			generators.bologna.mult *= 2;
+		}else if (building == "slime"){///here
+			generators.slime.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}else if (building == "slime"){
+			generators.slime.mult *= 2;
+		}
 		if (number == 1){
 			shopbtn1event = null;
 		}else if (number == 2){
@@ -336,8 +365,12 @@ function addShopBtn(building,basecost){
 	}
 }
 
-var prices = [10, 50, 100, 500, 2000, 10000, 80000, 400000, 1666666, 10000000, 55000000, 1000000000];
-var gen = ["teddy", "slime", "troll", "cookie", "bologna", "unicorn", "lnmonster", "bigfoot", "nymph", "dragon", "phoenix", "demonteddy"];
+function buyClick(n){
+	if (n === 2){
+		clickPower *= 2; 
+	}
+
+}
 
 function buy(upgrade){
 	var building = eval("generators." + upgrade + ".amount");
