@@ -43,12 +43,9 @@ function tab(n) {
 	}
 }
 
-function magicClick(){
-    magic += clickPower;
+function magicClick(n){
+    magic += n;
     document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
-    if ((magic >= 100) && (index == 1)){
-    	++index;
-    }
 }
 
 function save(){
@@ -282,31 +279,7 @@ function clickShopBtn(number,price,building){
 		document.getElementById("shopbtn" + number).onmousedown ="";
 		magic -= price;
 		document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
-		if (building == "teddy"){
-			generators.teddy.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}else if (building == "troll"){
-			generators.troll.mult *= 2;
-		}else if (building == "cookie"){
-			generators.cookie.mult *= 2;
-		}else if (building == "bologna"){
-			generators.bologna.mult *= 2;
-		}else if (building == "slime"){///here
-			generators.slime.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}else if (building == "slime"){
-			generators.slime.mult *= 2;
-		}
+		eval("generators." + building + ".mult *= 2;");
 		if (number == 1){
 			shopbtn1event = null;
 		}else if (number == 2){
