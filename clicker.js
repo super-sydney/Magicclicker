@@ -103,38 +103,67 @@ function save(){
 
 function load(){
 	var savegame = JSON.parse(localStorage.getItem("save"));
-	if (typeof savegame.shopbtn1 !== "undefined"){
+	if (savegame.shopbtn1class == "used"){
 		document.getElementById("shopbtn1").innerHTML = savegame.shopbtn1;
 		document.getElementById("shopbtn1").style = savegame.shopbtn1style;
 		document.getElementById("shopbtn1").className = savegame.shopbtn1class;
-		document.getElementById("shopbtn1").onmousedown = savegame.shopbtn1mousedown;
 		eval(savegame.shopbtn1event);
-	}if (typeof savegame.shopbtn2 !== "undefined"){
+	}else{
+		document.getElementById("shopbtn1").innerHTML = "A";
+		document.getElementById("shopbtn1").style = "display: none;";
+		document.getElementById("shopbtn1").className = "empty";
+	}
+	if (savegame.shopbtn2class == "used"){
 		document.getElementById("shopbtn2").innerHTML = savegame.shopbtn2;
 		document.getElementById("shopbtn2").style = savegame.shopbtn2style;
 		document.getElementById("shopbtn2").className = savegame.shopbtn2class;
 		eval(savegame.shopbtn2event);
-	}if (typeof savegame.shopbtn3 !== "undefined"){
+	}else{
+		document.getElementById("shopbtn2").innerHTML = "B";
+		document.getElementById("shopbtn2").style = "display: none;";
+		document.getElementById("shopbtn2").className = "empty";
+	}
+	if (savegame.shopbtn3class == "used"){
 		document.getElementById("shopbtn3").innerHTML = savegame.shopbtn3;
 		document.getElementById("shopbtn3").style = savegame.shopbtn3style;
 		document.getElementById("shopbtn3").className = savegame.shopbtn3class;
 		eval(savegame.shopbtn3event);
-	}if (typeof savegame.shopbtn4 !== "undefined"){
+	}else{
+		document.getElementById("shopbtn3").innerHTML = "C";
+		document.getElementById("shopbtn3").style = "display: none;";
+		document.getElementById("shopbtn3").className = "empty";
+	}
+	if (savegame.shopbtn4 == "used"){
 		document.getElementById("shopbtn4").innerHTML = savegame.shopbtn4;
 		document.getElementById("shopbtn4").style = savegame.shopbtn4style;
 		document.getElementById("shopbtn4").className = savegame.shopbtn4class;
 		eval(savegame.shopbtn4event);
-	}if (typeof savegame.shopbtn5 !== "undefined"){
+	}else{
+		document.getElementById("shopbtn4").innerHTML = "D";
+		document.getElementById("shopbtn4").style = "display: none;";
+		document.getElementById("shopbtn4").className = "empty";
+	}
+	if (savegame.shopbtn5 == "used"){
 		document.getElementById("shopbtn5").innerHTML = savegame.shopbtn5;
 		document.getElementById("shopbtn5").style = savegame.shopbtn5style;
 		document.getElementById("shopbtn5").className = savegame.shopbtn5class;
 		eval(savegame.shopbtn5event);
-	}if (typeof savegame.shopbtn6 !== "undefined"){
+	}else{
+		document.getElementById("shopbtn5").innerHTML = "E";
+		document.getElementById("shopbtn5").style = "display: none;";
+		document.getElementById("shopbtn5").className = "empty";
+	}
+	if (savegame.shopbtn6 == "used"){
 		document.getElementById("shopbtn6").innerHTML = savegame.shopbtn6;
 		document.getElementById("shopbtn6").style = savegame.shopbtn6style;
 		document.getElementById("shopbtn6").className = savegame.shopbtn6class;
 		eval(savegame.shopbtn6event);
-	}if (typeof savegame.magic !== "undefined"){
+	}else{
+		document.getElementById("shopbtn6").innerHTML = "F";
+		document.getElementById("shopbtn6").style = "display: none;";
+		document.getElementById("shopbtn6").className = "empty";
+	}
+	if ( savegame.magic == "used"){
 		magic = savegame.magic;
 		generators.teddy.amount = savegame.teddy;
 		generators.slime.amount = savegame.slime;
@@ -160,7 +189,6 @@ function load(){
 		generators.dragon.mult = savegame.dragonmult;
 		generators.phoenix.mult = savegame.phoenixmult;
 		generators.demonteddy.mult = savegame.demonteddymult;
-		invisBtn(1);
 		update();
 	}
 }
@@ -399,7 +427,7 @@ function numberTypeChange(){
 	}
 }
 
-function invisBtn(i){
+function invisBtn(i){ //WIP
 	if ((i <= 6) && (document.getElementById("shopbtn" + i).classList.contains("empty"))){
 		 document.getElementById("shopbtn" + i).style = "display: none;";
 		 invisBtn(++i);
