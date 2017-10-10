@@ -100,10 +100,12 @@ function save(){
 		phoenixmult: generators.phoenix.mult,
 		demonteddymult: generators.demonteddy.mult
 	};
+	console.log("saved");
 	localStorage.setItem("save",JSON.stringify(save));
 }
 
 function load(){
+	console.log("attempt load")
 	var savegame = JSON.parse(localStorage.getItem("save"));
 	if (savegame.shopbtn1class == "used"){
 		document.getElementById("shopbtn1").innerHTML = savegame.shopbtn1;
@@ -165,7 +167,7 @@ function load(){
 		document.getElementById("shopbtn6").style = "display: none;";
 		document.getElementById("shopbtn6").className = "empty";
 	}
-	if ( savegame.magic == "used"){
+	if (typeof savegame.magic !== "undefined"){
 		magic = savegame.magic;
 		generators.teddy.amount = savegame.teddy;
 		generators.slime.amount = savegame.slime;
@@ -191,6 +193,7 @@ function load(){
 		generators.dragon.mult = savegame.dragonmult;
 		generators.phoenix.mult = savegame.phoenixmult;
 		generators.demonteddy.mult = savegame.demonteddymult;
+		console.log("loaded");
 		update();
 	}
 }
