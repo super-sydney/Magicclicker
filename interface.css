@@ -6,6 +6,11 @@ img + button{
 	font-family: calibri;
 	font-size: 22;
 	word-wrap: break-word; 
+	background-color: white;
+}
+
+*{
+	font-family: 'Comic-Sans-MS', cursive, sans-serif;
 }
 
 br + img{
@@ -17,6 +22,19 @@ a, span{
 	font-family: calibri;
 	font-size: 18;
 	color: white;
+}
+
+div.tabpage::before
+{
+   content: "";
+   display: block;
+   position: absolute;
+   z-index: -1;
+   width: 57%;
+   height: 73%;
+   background: black;
+   opacity: 0.5;
+
 }
 
 .btn-group button{
