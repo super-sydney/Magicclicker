@@ -16,10 +16,11 @@
 			<button id="tabbtn3" onclick="tab(3)">Mages</button>
 			<button id="tabbtn4" onclick="tab(4)">Options</button>
 		</div>
-		<div style="height: 75%; width: 58%; overflow-y: scroll; border: 3px solid black" id="tabpage1" class="tabpage">
-			<p id="shopheading" style="font-size: 26; font-family: calibri; color: white;">Upgrades</p>
+		<div style="height: 75%; width: 58%; overflow-y: scroll; border: 3px solid white;" id="tabpage1" class="tabpage">
+			<header id="shopheading">Upgrades</header>
+			<br>
 			<div>
-				<img src="Sprites/teddy.png" style="width: 75; height: 75">
+				<img src="Sprites/teddy.png" style="width: 75; height: 75; padding-left: 20px;">
 				<button onmousedown='buy("teddy")'>Buy Teddy</button>
 				<span>Teddy bears:</span>
 				<span id="teddy">0</span>
@@ -105,6 +106,8 @@
 			</div>
 		</div>
 		<div style="display: none;" id="tabpage2" class="tabpage">
+			<header>Shop</header>
+			<br>
 			<button class="empty" style="display: none;" id="shopbtn1">A</button>
 			<button class="empty" style="display: none;" id="shopbtn2">B</button>
 			<button class="empty" style="display: none;" id="shopbtn3">C</button>
@@ -117,6 +120,8 @@
 			<button>3</button>
 		</div>
 		<div style="display: none;" id="tabpage4" class="tabpage">
+			<header>Options</header>
+			<br>
 			<button style="width: 200; height: 30; border: 2px solid black; font: 15px calibri;" id="nmrtype" onmousedown="numberTypeChange()">Shortened Notation</button>
 		</div>
 		<button style="background: url(Sprites/rabbit.png); background-size: cover; width: 35%; height: 70%; position: fixed; left: 60%; bottom: 5%; font-size: 35; color: white;" onmousedown="magicClick('x')">Click Me!</button>
