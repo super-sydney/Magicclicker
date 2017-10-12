@@ -10,10 +10,21 @@ img + button{
 }
 
 *{
-	font-family: 'Comic-Sans-MS', cursive, sans-serif;
+	font-family: 'arial';
+}
+
+header{
+	padding-left: 20px;
+	color: white;
+	font-size: 26px;
+}
+
+body{
+	overflow-y: hidden;
 }
 
 br + img{
+	padding-left: 20px;
 	width: 75;
 	height: 75;
 }
@@ -45,13 +56,6 @@ div.tabpage::before
     color: black;
     cursor: pointer;
     float: left;
-}
-
-.used button{
-	color: blue;
-	font-family: "Comic Sans MS";
-	border: pink;
-	background-color: red;
 }
 
 .btn-group button:not(:last-child){
