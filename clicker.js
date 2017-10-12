@@ -162,6 +162,8 @@ function save(){
 		shopbtn6event: shopbtn6event,
 		magic: magic,
 		clickingMult: clickingMult,
+		ind: ind,
+		clickPower: clickPower,
 		teddy: generators.teddy.amount,
 		slime: generators.slime.amount,
 		troll: generators.troll.amount,
@@ -256,6 +258,9 @@ function load(){
 	}
 	if (typeof savegame.magic !== "undefined"){
 		magic = savegame.magic;
+		clickingMult = savegame.clickingMult;
+		ind = savegame.ind;
+		clickPower  = savegame.clickPower;
 		generators.teddy.amount = savegame.teddy;
 		generators.slime.amount = savegame.slime;
 		generators.troll.amount = savegame.troll;
