@@ -1,4 +1,4 @@
-var magicAllTime = 0, magic = 0, numberType = 0, clickPower = 1, index = 1, shopbtn1event = null, shopbtn2event = null, shopbtn3event = null, shopbtn4event = null, shopbtn5event = null, shopbtn6event = null,
+var magicAllTime = 0, magic = 0, numberType = 0, clickingMult = 0, clickPower = 1, ind = 0, magicBefore = 0, magicAfter = 0, shopbtn1event = null, shopbtn2event = null, shopbtn3event = null, shopbtn4event = null, shopbtn5event = null, shopbtn6event = null,
 generators ={
 	"teddy": {amount: 0, mult: 0.1},
 	"slime": {amount: 0, mult: 0.5},
@@ -15,6 +15,8 @@ generators ={
 }, upgradeLevels = [1, 5, 25, 50, 100, 150, 200, 250, 300], 
 multiplier = [10, 50, 500, 50000, 5000000, 500000000, 500000000000, 500000000000000, 500000000000000000],
 prices = [10, 50, 100, 500, 2000, 10000, 80000, 400000, 1666666, 10000000, 55000000, 1000000000],
+clickUpgradeAppear = [20, 200, 4000, 4000000, 40000000, 400000000, 4000000000, 4000000000000, 4000000000000000, 4000000000000000000, 4000000000000000000000],
+clickPrices = [100, 500, 10000, 100000, 10000000, 100000000, 1000000000, 10000000000, 10000000000000, 10000000000000000, 10000000000000000000, 10000000000000000000000],
 gen = ["teddy", "slime", "troll", "cookie", "bologna", "unicorn", "lnmonster", "bigfoot", "nymph", "dragon", "phoenix", "demonteddy"];
 
 //functions
@@ -44,8 +46,92 @@ function tab(n) {
 }
 
 function magicClick(n){
-    magic += n;
-    document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
+	if (n == 'x'){
+		magicBefore = magic;
+		magic += clickPower + clickingMult*(generators.teddy.amount + generators.slime.amount + generators.troll.amount + generators.cookie.amount + generators.bologna.amount + generators.unicorn.amount + generators.lnmonster.amount + generators.bigfoot.amount + generators.nymph.amount + generators.dragon.amount + generators.phoenix.amount + generators.demonteddy.amount);
+		magicAfter = magic;
+		if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])){
+			console.log("thingiemcthing");
+			clickUpgrade(ind);
+			++ind;
+		}
+	}else{
+		magicBefore = magic;
+	    magic += n;
+	    magicAfter = magic;
+	    if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])){
+	    	console.log("thingiemcthing");
+			clickUpgrade(ind);
+			++ind;
+		}
+	}
+	document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
+}
+
+function clickUpgrade(ind){
+		addClickShopBtn(ind);
+		console.log("add button");
+}
+
+function addClickShopBtn(index){
+	if (document.getElementById("shopbtn1").className == "empty"){
+		document.getElementById("shopbtn1").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
+		document.getElementById("shopbtn1").className = "used";
+		document.getElementById("shopbtn1").style = "";
+		shopbtn1event = "document.getElementById('shopbtn1').addEventListener('click', function(){clickClickShopBtn(" + index + ", 1);}, {once: true});";
+		eval(shopbtn1event);
+	}else if (document.getElementById("shopbtn2").className == "empty"){
+		document.getElementById("shopbtn2").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
+		document.getElementById("shopbtn2").className = "used";
+		document.getElementById("shopbtn2").style = "";
+		shopbtn2event = "document.getElementById('shopbtn2').addEventListener('click', function(){clickClickShopBtn(" + index + ", 2);}, {once: true});";
+		eval(shopbtn2event);
+	}else if (document.getElementById("shopbtn3").className == "empty"){
+		document.getElementById("shopbtn3").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
+		document.getElementById("shopbtn3").className = "used";
+		document.getElementById("shopbtn3").style = "";
+		shopbtn3event = "document.getElementById('shopbtn3').addEventListener('click', function(){clickClickShopBtn(" + index + ", 3);}, {once: true});";
+		eval(shopbtn3event);
+	}else if (document.getElementById("shopbtn4").className == "empty"){
+		document.getElementById("shopbtn4").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
+		document.getElementById("shopbtn4").className = "used";
+		document.getElementById("shopbtn4").style = "";
+		shopbtn4event = "document.getElementById('shopbtn4').addEventListener('click', function(){clickClickShopBtn(" + index + ", 4);}, {once: true});";
+		eval(shopbtn4event);
+	}else if (document.getElementById("shopbtn5").className == "empty"){
+		document.getElementById("shopbtn5").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
+		document.getElementById("shopbtn5").className = "used";
+		document.getElementById("shopbtn5").style = "";
+		shopbtn5event = "document.getElementById('shopbtn5').addEventListener('click', function(){clickClickShopBtn(" + index + ", 5);}, {once: true});";
+		eval(shopbtn5event);
+	}else if (document.getElementById("shopbtn6").className == "empty"){
+		document.getElementById("shopbtn6").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
+		document.getElementById("shopbtn6").className = "used";
+		document.getElementById("shopbtn6").style = "";
+		shopbtn6event = "document.getElementById('shopbtn6').addEventListener('click', function(){clickClickShopBtn(" + index + ", 6);}, {once: true});";
+		eval(shopbtn6event);
+	}
+	console.log("hopefully didn't skip over stuff");
+}
+
+function clickClickShopBtn(index,number){
+	console.log("congrats, you did a click");
+	if (magic >= clickPrices[index]){
+		document.getElementById("shopbtn" + number).style = "display: none;";
+		document.getElementById("shopbtn" + number).className = "empty";
+		document.getElementById("shopbtn" + number).onmousedown ="";
+		magic -= clickPrices[index];
+		if ((index == 0) || (index == 1) || (index == 2)){
+			clickPower *= 2;
+		}else if (index == 3){
+			clickingMult = 0.1;
+		}else if (index == 4){
+			clickingMult = 0.5;
+		}else if ((index >= 5) && (index <= 11)){
+			clickingMult *= 10;
+		}
+		console.log('you bought it, good for you');
+	}
 }
 
 function save(){
@@ -75,6 +161,7 @@ function save(){
 		shopbtn6class: document.getElementById("shopbtn6").className,
 		shopbtn6event: shopbtn6event,
 		magic: magic,
+		clickingMult: clickingMult,
 		teddy: generators.teddy.amount,
 		slime: generators.slime.amount,
 		troll: generators.troll.amount,
@@ -105,7 +192,7 @@ function save(){
 }
 
 function load(){
-	console.log("attempt load")
+	console.log("attempt load");
 	var savegame = JSON.parse(localStorage.getItem("save"));
 	if (savegame.shopbtn1class == "used"){
 		document.getElementById("shopbtn1").innerHTML = savegame.shopbtn1;
@@ -201,6 +288,9 @@ function load(){
 function hardReset(){
 	localStorage.removeItem("save");
 	magic = 0;
+	ind = 0;
+	clickingMult = 0;
+	clickPower = 1;
 	generators.teddy.amount = 0;
 	generators.slime.amount = 0;
 	generators.troll.amount = 0;
@@ -267,7 +357,7 @@ function prestige(){
 
 //get rid of rogue decimals
 function rogueDec(n){
-	if (n > 100){
+	if (n > 1000){
 		n = Math.round(n);
 	}else{
 	n = Math.round(n*10)/10;
@@ -324,8 +414,8 @@ function addShopBtnEvent(number,price,building,basecost){
 
 function addShopBtn(building,basecost){
 	var a = eval("generators." + building + ".amount;"); 
-	var index = upgradeLevels.findIndex(function(n){return n==a;});
-	var price = multiplier[index]*basecost;
+	var number = upgradeLevels.findIndex(function(n){return n==a;});
+	var price = multiplier[number]*basecost;
 	if (document.getElementById("shopbtn1").className == "empty"){
 		addShopBtnEvent(1,price,building,basecost);
 	}else if (document.getElementById("shopbtn2").className == "empty"){
@@ -339,13 +429,6 @@ function addShopBtn(building,basecost){
 	}else if (document.getElementById("shopbtn6").className == "empty"){
 		addShopBtnEvent(6,price,building,basecost);
 	}
-}
-
-function buyClick(n){
-	if (n === 2){
-		clickPower *= 2; 
-	}
-
 }
 
 function buy(upgrade){
