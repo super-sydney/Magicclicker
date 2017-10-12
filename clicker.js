@@ -22,7 +22,7 @@ gen = ["teddy", "slime", "troll", "cookie", "bologna", "unicorn", "lnmonster", "
 //functions
 function tab(n) {
    	if (n == 1){
-		document.getElementById("tabpage1").style = "height: 75%; width: 58%; background-color: black; background-blend-mode: color-dodge; opacity: 0.5; overflow-y: scroll; border: 5px solid black";
+		document.getElementById("tabpage1").style = "height: 75%; width: 58%; overflow-y: scroll; border: 3px solid white";
 		document.getElementById("tabpage2").style = "display: none;";
 		document.getElementById("tabpage3").style = "display: none;";
 		document.getElementById("tabpage4").style = "display: none;";
@@ -52,7 +52,7 @@ function magicClick(n){
 		magicAfter = magic;
 		if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])){
 			console.log("thingiemcthing");
-			clickUpgrade(ind);
+			addClickShopBtn(ind);
 			++ind;
 		}
 	}else{
@@ -61,19 +61,15 @@ function magicClick(n){
 	    magicAfter = magic;
 	    if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])){
 	    	console.log("thingiemcthing");
-			clickUpgrade(ind);
+			addClickShopBtn(ind);
 			++ind;
 		}
 	}
 	document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
 }
 
-function clickUpgrade(ind){
-		addClickShopBtn(ind);
-		console.log("add button");
-}
-
 function addClickShopBtn(index){
+	document.getElementById("tabbtn2").style = "background-color: yellow;";
 	if (document.getElementById("shopbtn1").className == "empty"){
 		document.getElementById("shopbtn1").innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
 		document.getElementById("shopbtn1").className = "used";
