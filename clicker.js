@@ -8,6 +8,7 @@ var magicAllTime = 0,
     magicBefore = 0,
     magicAfter = 0,
   	prestigeBonus = 1,
+  	lastPrestige = 0,
     shopbtn1event = null,
     shopbtn2event = null,
     shopbtn3event = null,
@@ -72,7 +73,7 @@ var magicAllTime = 0,
     gen = ["teddy", "slime", "troll", "cookie", "bologna", "unicorn", "lnmonster", "bigfoot", "nymph", "dragon", "phoenix", "demonteddy"];
 
 //Stuff for the site
-function tab(n) {
+function tab(n) { //switch to tab n
     if (n == 1) {
         document.getElementById("tabpage1").style = "height: 75%; width: 58%; overflow-y: scroll; border: 3px solid white";
         document.getElementById("tabpage2").style = "display: none;";
@@ -97,7 +98,7 @@ function tab(n) {
     }
 }
 
-function numberTypeChange() {
+function numberTypeChange() { //change the way numbers are displayed
     if (numberType == 0) {
         ++numberType;
         document.getElementById("nmrtype").innerHTML = "Scientific Notation";
@@ -110,27 +111,27 @@ function numberTypeChange() {
     }
 }
 
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter(string) {//capitalize first letter for names
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 //adding magic
-function magicClick(n) {
-    if (n == 'x') {
+function magicClick(n) { //add n magic
+    if (n == 'x') { //manual click
         magicBefore = magic;
         magic += clickPower + (clickingMult * (generators.teddy.amount + generators.slime.amount + generators.troll.amount + generators.cookie.amount + generators.bologna.amount + generators.unicorn.amount + generators.lnmonster.amount + generators.bigfoot.amount + generators.nymph.amount + generators.dragon.amount + generators.phoenix.amount + generators.demonteddy.amount));
         magicAllTime += clickPower + (clickingMult * (generators.teddy.amount + generators.slime.amount + generators.troll.amount + generators.cookie.amount + generators.bologna.amount + generators.unicorn.amount + generators.lnmonster.amount + generators.bigfoot.amount + generators.nymph.amount + generators.dragon.amount + generators.phoenix.amount + generators.demonteddy.amount));
         magicAfter = magic;
-        if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])) {
+        if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])) { //add clicking upgrade
             addClickShopBtn(ind);
             ++ind;
         }
-    } else {
+    } else { //magic per second
         magicBefore = magic;
         magic += n;
         magicAllTime += n
         magicAfter = magic;
-        if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])) {
+        if ((magicBefore < clickUpgradeAppear[ind]) && (magicAfter >= clickUpgradeAppear[ind])) { //add clicking upgrade
             addClickShopBtn(ind);
             ++ind;
         }
@@ -139,17 +140,17 @@ function magicClick(n) {
 }
 
 //buy upgrade
-function buy(upgrade) {
-    var building = eval("generators." + upgrade + ".amount");
+function buy(upgrade) { //buy whatever building
+    var building = eval("generators." + upgrade + ".amount"); //"eval is evil" SHUT UP
     var n = gen.findIndex(function(N) {
         return N == upgrade;
     });
     var m = prices[n];
-    var cost = Math.floor(m * Math.pow(1.1, building));
-    if (magic >= cost) {
-        magic -= rogueDec(cost);
-        ++building;
-        if (upgrade == "teddy") {
+    var cost = Math.floor(m * Math.pow(1.1, building)); //get the cost
+    if (magic >= cost) { //if you have enough magic
+        magic -= rogueDec(cost); //magic - cost
+        ++building; //add one of that building                  
+        if (upgrade == "teddy") { //add one again??? i should fix this tbh
             ++generators.teddy.amount;
         } else if (upgrade == "slime") {
             ++generators.slime.amount;
@@ -174,20 +175,19 @@ function buy(upgrade) {
         } else if (upgrade == "demonteddy") {
             ++generators.demonteddy.amount;
         }
-        newCost = Math.floor(m * Math.pow(1.1, building));
-        document.getElementById(upgrade + "Price").innerHTML = rogueDec(newCost);
-        document.getElementById("magic").innerHTML = rogueDec(magic);
-        if (upgradeLevels.indexOf(building) >= 0) {
+        newCost = Math.floor(m * Math.pow(1.1, building)); //get the next cost
+        document.getElementById(upgrade + "Price").innerHTML = rogueDec(newCost); //update it
+        if (upgradeLevels.indexOf(building) >= 0) { //add a shop button if necessary
             addShopBtn(upgrade, m);
         }
-        update();
+        update(); //update everything
     }
 }
 
 //click upgrade shop buttons
 function addClickShopBtn(index) {
-	var number = 0
-    document.getElementById("tabbtn2").style = "background-color: yellow;";
+	var number = 0 //create variable
+    document.getElementById("tabbtn2").style = "background-color: yellow;"; //make the button yellow
     if (document.getElementById("shopbtn1").className == "empty") {
         number = 1
     } else if (document.getElementById("shopbtn2").className == "empty") {
@@ -200,24 +200,23 @@ function addClickShopBtn(index) {
         number = 5
     } else if (document.getElementById("shopbtn6").className == "empty") {
         number = 6
-    }   
+    }                               //put code for the eventlistener in a variable
     eval("shopbtn" + number + "event = document.getElementById('shopbtn" + number + "').addEventListener('click', function(){clickClickShopBtn(" + index + "," + number + ");});");
-    document.getElementById("shopbtn" + number).innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index];
-    document.getElementById("shopbtn" + number).className = "used";
-    document.getElementById("shopbtn" + number).style = "";
-    document.getElementById("shopbtn" + number).addEventListener('click', function(){clickClickShopBtn(index, number);});
+    document.getElementById("shopbtn" + number).innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index]; //add text on thebutton
+    document.getElementById("shopbtn" + number).className = "used"; //change class
+    document.getElementById("shopbtn" + number).style = ""; //show button
+    document.getElementById("shopbtn" + number).addEventListener('click', function(){clickClickShopBtn(index, number);}); //add event listener
 }	
 
-function clickClickShopBtn(index, number) {
-    if (magic >= clickPrices[index]) {
-    	var oldElement = document.getElementById("shopbtn" + number);
-        var newElement = oldElement.cloneNode(true);
-        oldElement.parentNode.replaceChild(newElement, oldElement);
-        document.getElementById("shopbtn" + number).style = "display: none;";
-        document.getElementById("shopbtn" + number).className = "empty";
-        document.getElementById("shopbtn" + number).onmousedown = "";
-        magic -= clickPrices[index];
-        if ((index == 0) || (index == 1) || (index == 2)) {
+function clickClickShopBtn(index, number) { //do this when the click upgrade is clicked
+    if (magic >= clickPrices[index]) { //if you have enough magic
+    	var oldElement = document.getElementById("shopbtn" + number); //get button
+        var newElement = oldElement.cloneNode(true); //get a cloned version
+        oldElement.parentNode.replaceChild(newElement, oldElement); //replace it to get rid of the eventlistener
+        document.getElementById("shopbtn" + number).style = "display: none;"; //hide it
+        document.getElementById("shopbtn" + number).className = "empty"; //change class
+        magic -= clickPrices[index]; //remove the cost from magic
+        if ((index == 0) || (index == 1) || (index == 2)) { //depending on the index, do different things
             clickPower *= 2;
         } else if (index == 3) {
             clickingMult = 0.1;
@@ -230,19 +229,17 @@ function clickClickShopBtn(index, number) {
 }
 
 //normal upgrade shop buttons
-function clickShopBtn(number, price, building) {
+function clickShopBtn(number, price, building) { //do this when you click a regular shopbutton
     if (magic >= price) {
-    	var oldElement = document.getElementById("shopbtn" + number);
+    	var oldElement = document.getElementById("shopbtn" + number); //same stuff
         var newElement = oldElement.cloneNode(true);
         oldElement.parentNode.replaceChild(newElement, oldElement);
         document.getElementById("shopbtn" + number).style = "display: none;";
         document.getElementById("shopbtn" + number).className = "empty";
-        document.getElementById("shopbtn" + number).onmousedown = "";
-        document.getElementById("shopbtn" + number).removeEventListener('click',function(){clickShopBtn(number, price, building);});
         magic -= price;
         document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
-        eval("generators." + building + ".mult *= 2;");
-        if (number == 1) {
+        eval("generators." + building + ".mult *= 2;"); //double multiplier
+        if (number == 1) { //depending on number, turn variable into "null"
             shopbtn1event = null;
         } else if (number == 2) {
             shopbtn2event = null;
@@ -255,17 +252,17 @@ function clickShopBtn(number, price, building) {
         } else if (number == 6) {
             shopbtn6event = null;
         }
-        update();
-        save();
+        update(); //update game
+        save(); //save game
     }
 }
 
-function addShopBtnEvent(number, price, building, basecost) {
-    document.getElementById("shopbtn" + number).style = "";
-    document.getElementById("shopbtn" + number).className = "used";
-    document.getElementById("shopbtn" + number).innerHTML = "Building: " + capitalizeFirstLetter(building) + "<br> Cost: " + price;
-    document.getElementById("shopbtn" + number).addEventListener('click', function() {clickShopBtn(number, price, building);});
-    if (number == 1) {
+function addShopBtnEvent(number, price, building, basecost) { //add a shop button
+    document.getElementById("shopbtn" + number).style = ""; //show button
+    document.getElementById("shopbtn" + number).className = "used"; //change class
+    document.getElementById("shopbtn" + number).innerHTML = "Building: " + capitalizeFirstLetter(building) + "<br> Cost: " + price; //put text on button
+    document.getElementById("shopbtn" + number).addEventListener('click', function() {clickShopBtn(number, price, building);}); //add event listener
+    if (number == 1) { //depending on number, put code in a variable to run when loading with eval
         shopbtn1event = "document.getElementById('shopbtn1').addEventListener('click',function(){clickShopBtn(1," + price + "," + building + ");});";
     } else if (number == 2) {
         shopbtn2event = "document.getElementById('shopbtn2').addEventListener('click',function(){clickShopBtn(2," + price + "," + building + ");});";
@@ -278,16 +275,16 @@ function addShopBtnEvent(number, price, building, basecost) {
     } else if (number == 6) {
         shopbtn6event = "document.getElementById('shopbtn6').addEventListener('click',function(){clickShopBtn(6," + price + "," + building + ");});";
     }
-    document.getElementById("tabbtn2").style = "background-color: yellow";
+    document.getElementById("tabbtn2").style = "background-color: yellow"; //make button yellow
 }
 
-function addShopBtn(building, basecost) {
-    var a = eval("generators." + building + ".amount;");
-    var number = upgradeLevels.findIndex(function(n) {
+function addShopBtn(building, basecost) { //add a button
+    var a = eval("generators." + building + ".amount;"); //amount of certain generator
+    var number = upgradeLevels.findIndex(function(n) { //get index of amount of generators
         return n == a;
     });
-    var price = multiplier[number] * basecost;
-    if (document.getElementById("shopbtn1").className == "empty") {
+    var price = multiplier[number] * basecost; //get price
+    if (document.getElementById("shopbtn1").className == "empty") { //use empty button
         addShopBtnEvent(1, price, building, basecost);
     } else if (document.getElementById("shopbtn2").className == "empty") {
         addShopBtnEvent(2, price, building, basecost);
@@ -303,8 +300,8 @@ function addShopBtn(building, basecost) {
 }
 
 //saving/loading/resetting
-function save() {
-    var save = {
+function save() { 
+    var save = { //create save variable
         shopbtn1: document.getElementById("shopbtn1").innerHTML,
         shopbtn1style: document.getElementById("shopbtn1").style,
         shopbtn1class: document.getElementById("shopbtn1").className,
@@ -358,11 +355,11 @@ function save() {
         phoenixmult: generators.phoenix.mult,
         demonteddymult: generators.demonteddy.mult
     };
-    localStorage.setItem("save", JSON.stringify(save));
+    localStorage.setItem("save", JSON.stringify(save)); //use localStorage to store the save variable
 }
 
 function load() {
-    var savegame = JSON.parse(localStorage.getItem("save"));
+    var savegame = JSON.parse(localStorage.getItem("save")); //get save game
     if (savegame.shopbtn1class == "used") {
         document.getElementById("shopbtn1").innerHTML = savegame.shopbtn1;
         document.getElementById("shopbtn1").style = savegame.shopbtn1style;
@@ -454,11 +451,28 @@ function load() {
         generators.demonteddy.mult = savegame.demonteddymult;
         update();
     }
+    if (typeof Date.parse(localStorage.oldDate) !== "undefined"){
+    	var newDate = new Date;
+    	var diff = (newDate - Date.parse(localStorage.oldDate)) / 1000;
+    	if (diff > 2592000){
+    		window.alert("Y U no play my game");
+    	}else{
+    		diff = diff * prestigeBonus * generators.teddy.amount * generators.teddy.mult + generators.slime.amount * generators.slime.mult + generators.troll.amount * generators.troll.mult + generators.cookie.amount * generators.cookie.mult + generators.bologna.amount * generators.bologna.mult + generators.unicorn.amount * generators.unicorn.mult + generators.lnmonster.amount * generators.lnmonster.mult + generators.bigfoot.amount * generators.bigfoot.mult + generators.nymph.amount * generators.nymph.mult + generators.dragon.amount * generators.dragon.mult + generators.phoenix.amount * generators.phoenix.mult + generators.demonteddy.amount * generators.demonteddy.mult;
+    		magic += diff
+    		window.alert("You received\n" + abbreviateNumber(rogueDec(diff)) + "\nmagic while you were away.")
+    	}
+    }
+}
+
+function unload(){
+	var oldDate = new Date();		
+	localStorage.oldDate = oldDate;
 }
 
 function reset(type) {
 	if (type == "hard"){
     	localStorage.removeItem("save");
+    	localStorage.removeItem("date");
     	magicAllTime = 0;
 	}
     magic = 0;
@@ -517,11 +531,11 @@ function reset(type) {
 }
 
 function prestige() {
-	var prestige = abbreviateNumber(floor((Math.pow((magicAllTime/1000000000000), (1/3)))));
+	var prestige = abbreviateNumber(Math.floor((Math.pow((magicAllTime/1000000000000), (1/3))))); //get prestige
 	if (prestige == lastPrestige){
 		window.confirm("You can't prestige yet.")
 	}else if (window.confirm("Do you want to prestige?\nyou'll get " + (prestige-lastPrestige) + " prestige \n(Each prestige is a 1% bonus)")) {
-    	var lastPrestige = prestige
+    	lastPrestige = prestige
         prestigeBonus = 1 + (prestige * 0.1); 
 	    reset("soft");
     }
@@ -557,7 +571,7 @@ function update() {
 }
 
 //Make numbers readable
-function rogueDec(n) {
+function rogueDec(n) { //round things off
     if (n > 1000) {
         n = Math.round(n);
     } else {
@@ -566,7 +580,7 @@ function rogueDec(n) {
     return n;
 }
 
-function abbreviateNumber(value) {
+function abbreviateNumber(value) { 
     if (numberType == 0) {
         var newValue = value;
         if (value >= 1000) {
@@ -592,12 +606,12 @@ function abbreviateNumber(value) {
 }
 
 //game loop
-window.setInterval(function() {
+window.setInterval(function() { //game loop for magic per second
     magicClick(rogueDec(prestigeBonus * generators.teddy.amount * generators.teddy.mult + generators.slime.amount * generators.slime.mult + generators.troll.amount * generators.troll.mult + generators.cookie.amount * generators.cookie.mult + generators.bologna.amount * generators.bologna.mult + generators.unicorn.amount * generators.unicorn.mult + generators.lnmonster.amount * generators.lnmonster.mult + generators.bigfoot.amount * generators.bigfoot.mult + generators.nymph.amount * generators.nymph.mult + generators.dragon.amount * generators.dragon.mult + generators.phoenix.amount * generators.phoenix.mult + generators.demonteddy.amount * generators.demonteddy.mult) / 25);
     document.getElementById("magic").innerHTML = abbreviateNumber(rogueDec(magic));
     update();
 }, 40);
 
-window.setInterval(function() {
+window.setInterval(function() { //autosave
     save();
 }, 10000);
