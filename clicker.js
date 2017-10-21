@@ -451,7 +451,7 @@ function load() {
         generators.demonteddy.mult = savegame.demonteddymult;
         update();
     }
-    if (typeof Date.parse(localStorage.oldDate) !== "undefined"){
+    if (typeof Date.parse(localStorage.oldDate) !== "object"){
     	var newDate = new Date;
     	var diff = (newDate - Date.parse(localStorage.oldDate)) / 1000;
     	if (diff > 2592000){
