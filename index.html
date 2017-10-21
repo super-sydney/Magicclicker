@@ -3,7 +3,8 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 	</head>
-	<body style="background-image: url(Sprites/room.png); background-attachment: fixed; background-size: cover;" onload="load();">
+	<body style="background-image: url(Sprites/room.png); background-attachment: fixed; background-size: cover;"
+	 onload="load();" onbeforeunload="unload(); save();">
 		<script type="text/javascript" src="clicker.js"></script>
 		<button onmousedown="reset('hard')">Hard Reset</button>
 		<button onmousedown="prestige()">Prestige</button>
