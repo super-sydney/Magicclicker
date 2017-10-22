@@ -5,6 +5,7 @@ var magicAllTime = 0,
     clickingMult = 0,
     clickPower = 1,
     ind = 0,
+    showGen = 83,
     magicBefore = 0,
     magicAfter = 0,
   	prestigeBonus = 1,
@@ -115,6 +116,12 @@ function capitalizeFirstLetter(string) {//capitalize first letter for names
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function showNextGen(){
+	console.log(showGen);
+	++showGen;
+	document.getElementById("l" + showGen + "anl").style = ""
+}
+
 //adding magic
 function magicClick(n) { //add n magic
     if (n == 'x') { //manual click
@@ -147,6 +154,9 @@ function buy(upgrade) { //buy whatever building
     });
     var m = prices[n];
     var cost = Math.floor(m * Math.pow(1.1, building)); //get the cost
+    if (building == 0){
+    	showNextGen();
+    }
     if (magic >= cost) { //if you have enough magic
         magic -= rogueDec(cost); //magic - cost
         ++building; //add one of that building                  
@@ -458,8 +468,10 @@ function load() {
     		window.alert("Y U no play my game");
     	}else{
     		diff = diff * prestigeBonus * generators.teddy.amount * generators.teddy.mult + generators.slime.amount * generators.slime.mult + generators.troll.amount * generators.troll.mult + generators.cookie.amount * generators.cookie.mult + generators.bologna.amount * generators.bologna.mult + generators.unicorn.amount * generators.unicorn.mult + generators.lnmonster.amount * generators.lnmonster.mult + generators.bigfoot.amount * generators.bigfoot.mult + generators.nymph.amount * generators.nymph.mult + generators.dragon.amount * generators.dragon.mult + generators.phoenix.amount * generators.phoenix.mult + generators.demonteddy.amount * generators.demonteddy.mult;
-    		magic += diff
     		window.alert("You received\n" + abbreviateNumber(rogueDec(diff)) + "\nmagic while you were away.")
+    		for (var i = diff/100; i > 0; --i){
+    			magicClick(100);
+    		}
     	}
     }
 }
