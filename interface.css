@@ -1,81 +1,68 @@
-img + button{
-	color: black;
-	border: 2px solid black;
-	width: 200px;
-	height: 60px;
-	font-family: calibri;
-	font-size: 22;
-	word-wrap: break-word; 
+img + button {
+    color: black;
+    border: 2px solid black;
+    width: 200px;
+    height: 60px;
+    font-family: calibri;
+    font-size: 22;
+    word-wrap: break-word;
+    background-color: white;
+}
+* {
+    font-family: 'arial';
+}
+header {
+    padding-left: 20px;
+    color: white;
+    font-size: 26px;
+}
+body {
+    overflow-y: hidden;
+}
+
+img {
+    padding-left: 20px;
+    width: 75;
+    height: 75;
+}
+a,
+span {
+    font-family: calibri;
+    font-size: 18;
+    color: white;
+}
+div.tabpage::before {
+    content: "";
+    display: block;
+    position: fixed;
+    z-index: -1;
+    width: 57%;
+    height: 73%;
+    background: black;
+    opacity: 0.5;
+}
+.btn-group button {
 	background-color: white;
-}
-
-*{
-	font-family: 'arial';
-}
-
-header{
-	padding-left: 20px;
-	color: white;
-	font-size: 26px;
-}
-
-body{
-	overflow-y: hidden;
-}
-
-br + img{
-	padding-left: 20px;
-	width: 75;
-	height: 75;
-}
-
-a, span{
-	font-family: calibri;
-	font-size: 18;
-	color: white;
-}
-
-div.tabpage::before
-{
-   content: "";
-   display: block;
-   position: absolute;
-   z-index: -1;
-   width: 57%;
-   height: 73%;
-   background: black;
-   opacity: 0.5;
-
-}
-
-.btn-group button{
-	background-size: 50px 50px;
-	width: 75;
-	height: 75;
-    border: 2px solid black; 
+    background-size: 50px 50px;
+    width: 75;
+    height: 75;
+    border: 2px solid black;
     color: black;
     cursor: pointer;
     float: left;
 }
-
-.btn-group button:not(:last-child){
+.btn-group button:not(:last-child) {
     border-right: none;
 }
-
 .btn-group:after {
     content: "";
     clear: both;
     display: table;
 }
+.btn-group button:hover {
+    border: 3px solid black;
+} 
 
-.btn-group button:hover{
-	border: 3px solid black;
-}
-
-#shopbtn1 button:hover{
-	
-}
-
-.hide{
-	display: none;
+.hide {
+    display: none;
 }
