@@ -122,6 +122,13 @@ function showNextGen(){
 	document.getElementById("l" + showGen + "anl").style = ""
 }
 
+function showBox(){
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var w = canvas.width;
+	var h = canvas.height;
+}
+
 //adding magic
 function magicClick(n) { //add n magic
     if (n == 'x') { //manual click
@@ -197,21 +204,28 @@ function buy(upgrade) { //buy whatever building
 //click upgrade shop buttons
 function addClickShopBtn(index) {
 	var number = 0 //create variable
-    document.getElementById("tabbtn2").style = "background-color: yellow;"; //make the button yellow
+	document.getElementById("tabbtn2").style.animationName = "turnYellow"; //make button yellow
+    document.getElementById("tabbtn2").style.animationDuration = "1s";
+    document.getElementById("tabbtn2").style.animationIterationCount = "infinite";   
     if (document.getElementById("shopbtn1").className == "empty") {
-        number = 1
+        number = 1          //put code for the eventlistener in a variable
+        shopbtn1event = "document.getElementById('shopbtn1').addEventListener('click', function(){clickClickShopBtn(index,1);})";
     } else if (document.getElementById("shopbtn2").className == "empty") {
         number = 2
+        shopbtn2event = "document.getElementById('shopbtn2').addEventListener('click', function(){clickClickShopBtn(index,2);})";
     } else if (document.getElementById("shopbtn3").className == "empty") {
         number = 3
+        shopbtn3event = "document.getElementById('shopbtn3').addEventListener('click', function(){clickClickShopBtn(index,3);})";
     } else if (document.getElementById("shopbtn4").className == "empty") {
         number = 4
+        shopbtn4event = "document.getElementById('shopbtn4').addEventListener('click', function(){clickClickShopBtn(index,4);})";
     } else if (document.getElementById("shopbtn5").className == "empty") {
         number = 5
+        shopbtn5event = "document.getElementById('shopbtn5').addEventListener('click', function(){clickClickShopBtn(index,5);})";
     } else if (document.getElementById("shopbtn6").className == "empty") {
         number = 6
-    }                               //put code for the eventlistener in a variable
-    eval("shopbtn" + number + "event = document.getElementById('shopbtn" + number + "').addEventListener('click', function(){clickClickShopBtn(" + index + "," + number + ");});");
+        shopbtn6event = "document.getElementById('shopbtn6').addEventListener('click', function(){clickClickShopBtn(index,6);})";
+    }                               
     document.getElementById("shopbtn" + number).innerHTML = "Upgrade Clicking <br> Price: " + clickPrices[index]; //add text on thebutton
     document.getElementById("shopbtn" + number).className = "used"; //change class
     document.getElementById("shopbtn" + number).style = ""; //show button
@@ -285,7 +299,9 @@ function addShopBtnEvent(number, price, building, basecost) { //add a shop butto
     } else if (number == 6) {
         shopbtn6event = "document.getElementById('shopbtn6').addEventListener('click',function(){clickShopBtn(6," + price + "," + building + ");});";
     }
-    document.getElementById("tabbtn2").style = "background-color: yellow"; //make button yellow
+    document.getElementById("tabbtn2").style.animationName = "turnYellow"; //make button yellow
+    document.getElementById("tabbtn2").style.animationDuration = "1s";
+    document.getElementById("tabbtn2").style.animationIterationCount = "infinite";
 }
 
 function addShopBtn(building, basecost) { //add a button
@@ -339,6 +355,7 @@ function save() {
         magic: magic,
         clickingMult: clickingMult,
         ind: ind,
+        showGen: showGen,
         clickPower: clickPower,
         teddy: generators.teddy.amount,
         slime: generators.slime.amount,
@@ -434,6 +451,7 @@ function load() {
         magic = savegame.magic;
         clickingMult = savegame.clickingMult;
         ind = savegame.ind;
+        showGen = savegame.showGen
         clickPower = savegame.clickPower;
         generators.teddy.amount = savegame.teddy;
         generators.slime.amount = savegame.slime;
@@ -459,6 +477,9 @@ function load() {
         generators.dragon.mult = savegame.dragonmult;
         generators.phoenix.mult = savegame.phoenixmult;
         generators.demonteddy.mult = savegame.demonteddymult;
+        for (var i = 84; i <= showGen; i++){
+        	document.getElementById("l" + i + "anl").style = "";
+        }
         update();
     }
     if (typeof Date.parse(localStorage.oldDate) !== "object"){
@@ -466,11 +487,11 @@ function load() {
     	var diff = (newDate - Date.parse(localStorage.oldDate)) / 1000;
     	if (diff > 2592000){
     		window.alert("Y U no play my game");
-    	}else{
+    	}else if (!(diff <= 60) || !(diff >= 1814400)) {
     		diff = diff * prestigeBonus * generators.teddy.amount * generators.teddy.mult + generators.slime.amount * generators.slime.mult + generators.troll.amount * generators.troll.mult + generators.cookie.amount * generators.cookie.mult + generators.bologna.amount * generators.bologna.mult + generators.unicorn.amount * generators.unicorn.mult + generators.lnmonster.amount * generators.lnmonster.mult + generators.bigfoot.amount * generators.bigfoot.mult + generators.nymph.amount * generators.nymph.mult + generators.dragon.amount * generators.dragon.mult + generators.phoenix.amount * generators.phoenix.mult + generators.demonteddy.amount * generators.demonteddy.mult;
     		window.alert("You received\n" + abbreviateNumber(rogueDec(diff)) + "\nmagic while you were away.")
-    		for (var i = diff/100; i > 0; --i){
-    			magicClick(100);
+    		for (var i = 100; i > 0; --i){
+    			magicClick(diff/100);
     		}
     	}
     }
@@ -489,6 +510,7 @@ function reset(type) {
 	}
     magic = 0;
     ind = 0;
+    showGen = 83;
     clickingMult = 0;
     clickPower = 1;
     generators.teddy.amount = 0;
@@ -515,6 +537,14 @@ function reset(type) {
     generators.dragon.mult = 25000;
     generators.phoenix.mult = 100000;
     generators.demonteddy.mult = 1000000;
+    for (var i = 1; i < 7; ++i) {  	
+   	    var oldElement = document.getElementById("shopbtn" + i);
+       	var newElement = oldElement.cloneNode(true);
+    	oldElement.parentNode.replaceChild(newElement, oldElement);
+    }
+    for (var i = 84; i <= 92; i++){
+    	document.getElementById("l" + i + "anl").style = "display: none;";
+    }
     document.getElementById("shopbtn1").innerHTML = "A";
     document.getElementById("shopbtn1").className = "empty";
     document.getElementById("shopbtn1").style = "display: none;";
@@ -533,13 +563,6 @@ function reset(type) {
     document.getElementById("shopbtn6").innerHTML = "F";
     document.getElementById("shopbtn6").className = "empty";
     document.getElementById("shopbtn6").style = "display: none;";
-    for (var i = 0; i < 7; ++i) {
-    	if (document.getElementById("shopbtn" + i).className == "used"){
-    	    var oldElement = document.getElementById("shopbtn" + i);
-        	var newElement = oldElement.cloneNode(true);
-        	oldElement.parentNode.replaceChild(newElement, oldElement);
-    	}
-    }
 }
 
 function prestige() {
