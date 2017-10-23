@@ -9,11 +9,9 @@ img + button {
     background-color: white;
     cursor: pointer;
 }
-
-img + button:hover{
-	border: 3px solid black;
+img + button:hover {
+    border: 3px solid black;
 }
-
 * {
     font-family: 'arial';
 }
@@ -25,7 +23,6 @@ header {
 body {
     overflow-y: hidden;
 }
-
 img {
     padding-left: 20px;
     width: 75;
@@ -47,21 +44,18 @@ div.tabpage::before {
     background: black;
     opacity: 0.5;
 }
-
-br ~ button{
-	width: 150px;
-	height: 50px;
-	border: 2px solid black;
-	background-color: white;
-	cursor: pointer;
+button.used {
+    width: 150px;
+    height: 50px;
+    border: 2px solid black;
+    background-color: white;
+    cursor: pointer;
 }
-
-br ~ button:hover{
-	border: 3px solid black;
+br ~ button:hover {
+    border: 3px solid black;
 }
-
 .btn-group button {
-	background-color: white;
+    background-color: white;
     background-size: 50px 50px;
     width: 75;
     height: 75;
@@ -81,13 +75,17 @@ br ~ button:hover{
 .btn-group button:hover {
     border: 3px solid black;
 }
-
-@keyframes turnYellow{
-	0% {
-		background-color: white;
-	}50% {
-		background-color: yellow;
-	}100% {
-		background-color: white;
-	}
+@keyframes turnYellow {
+    0% {
+        background-color: white;
+    }
+    50% {
+        background-color: yellow;
+    }
+    100% {
+        background-color: white;
+    }
 }
+/*document.getElementById("tabbtn2").style.animationName = "turnYellow"; //make button yellow
+    document.getElementById("tabbtn2").style.animationDuration = "1s";
+    document.getElementById("tabbtn2").style.animationIterationCount = "infinite";*/
