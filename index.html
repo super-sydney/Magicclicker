@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="interface.css" />
 </head>
-<title></title>
-
+<title>Magic Clicker</title>
 <body style="background-image: url(Sprites/room.png); background-attachment: fixed; background-size: cover;" onload="load();" onbeforeunload="unload();">
     <script type="text/javascript" src="clicker.js"></script>
     <button onmousedown="reset('hard')">Hard Reset</button>
-    <button onmousedown="prestige()">Prestige</button>
-    <button onmousedown="save()">Save Game</button>
-    <button onmousedown="load()">Load Game</button>
+    <button onmousedown="prestige();">Prestige</button>
+    <button onmousedown="save();">Save Game</button>
+    <button onmousedown="load();">Load Game</button>
     <button id="scenery">Show Scenery</button>
     <br>
     <br>
@@ -22,7 +21,6 @@
         <button id="tabbtn4" onclick="tab(4)">Options</button>
     </div>
     <div style="height: 75%; width: 58%; overflow-y: scroll; overflow-x: hidden; border: 3px solid white;" id="tabpage1" class="tabpage">
-
         <div>
             <div style="padding-bottom: 20px; padding-left: 20px;" id="shop">
                 <p style="color: white; font-size: 26px;">Shop</p>
@@ -170,5 +168,4 @@
     <span style="position:fixed; left: 60%; bottom: 75%;">Magic Per Second:</span>
     <a style="position:fixed; left: 75%; bottom: 75%;" id="mps">0</a>
 </body>
-
 </html>
