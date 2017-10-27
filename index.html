@@ -1,172 +1,171 @@
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="interface.css" />
+<meta charset="utf-8">
+<link rel="stylesheet" href="interface.css">
 </head>
 <title>Magic Clicker</title>
-<body style="background-image: url(Sprites/room.png); background-attachment: fixed; background-size: cover;" onload="load();" onbeforeunload="unload();">
-    <script type="text/javascript" src="clicker.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <button onmousedown="reset('hard')">Hard Reset</button>
-    <button onmousedown="prestige();">Prestige</button>
-    <button onmousedown="save();">Save Game</button>
-    <button onmousedown="load();">Load Game</button>
-    <button id="scenery">Show Scenery</button>
-    <br>
-    <br>
-    <div class="btn-group">
-        <button id="tabbtn1" onclick="tab(1)">Upgrades</button>
-        <button id="tabbtn2" onclick="tab(2)">Skills</button>
-        <button id="tabbtn3" onclick="tab(3)">Artifacts</button>
-        <button id="tabbtn4" onclick="tab(4)">Options</button>
-    </div>
-    <div style="height: 75%; width: 58%; overflow-y: scroll; overflow-x: hidden; border: 3px solid white;" id="tabpage1" class="tabpage">
-        <div>
-            <div style="padding-bottom: 20px; padding-left: 20px;" id="shop">
-                <p style="color: white; font-size: 26px;">Shop</p>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn1">1</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn2">2</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn3">3</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn4">4</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn5">5</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn6">6</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn7">7</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn8">8</button>
-                <button onmouseover="" class="empty" style="display: none;" id="shopbtn9">9</button>
-            </div>
-            <header style="padding-left: 20px">Upgrades</header>
-            <br>
-            <div>
-                <img src="Sprites/teddy.png" style="width: 75; height: 75; padding-left: 20px;">
-                <button onmousedown='buy("teddy")''>Buy Teddy</button>
-                <span>Teddy bears:</span>
-                <span id="teddy">0</span>
-                <span>Price:</span>
-                <span id="teddyPrice">10</span>
-                <br>
-            </div>
-            <div>
-                <img src="Sprites/slime.png">
-                <button onmousedown='buy("slime")'>Buy Slime</button>
-                <span>Slimes:</span>
-                <span id="slime">0</span>
-                <span>Price:</span>
-                <span id="slimePrice">50</span>
-                <br>
-            </div>
-            <div>
-                <img src="Sprites/troll.png">
-                <button onmousedown='buy("troll")'>Buy Troll</button>
-                <span>Trolls:</span>
-                <span id="troll">0</span>
-                <span>Price:</span>
-                <span id="trollPrice">100</span>
-                <br>
-            </div>
-            <div id="l84anl" style="display: none;">
-                <img src="Sprites/cookie.png">
-                <button onmousedown='buy("cookie")'>Buy Magical cookie</button>
-                <span>Magical Cookies:</span>
-                <span id="cookie">0</span>
-                <span>Price:</span>
-                <span id="cookiePrice">500</span>
-                <br>
-            </div>
-            <div id="l85anl" style="display: none;">
-                <img src="Sprites/bologna.png">
-                <button onmousedown='buy("bologna")'>Buy Bologna Man</button>
-                <span>Bologna Men:</span>
-                <span id="bologna">0</span>
-                <span>Price:</span>
-                <span id="bolognaPrice">2000</span>
-                <br>
-            </div>
-            <div id="l86anl" style="display: none;">
-                <img src="Sprites/unicorn.png">
-                <button onmousedown='buy("unicorn")'>Buy Unicorn</button>
-                <span>Unicorn:</span>
-                <span id="unicorn">0</span>
-                <span>Price:</span>
-                <span id="unicornPrice">10000</span>
-                <br>
-            </div>
-            <div id="l87anl" style="display: none;">
-                <img src="Sprites/lnmonster.png">
-                <button onmousedown='buy("lnmonster")'>Buy L.N. Monster</button>
-                <span>Loch Ness Monsters:</span>
-                <span id="lnmonster">0</span>
-                <span>Price:</span>
-                <span id="lnmonsterPrice">80000</span>
-                <br>
-            </div>
-            <div id="l88anl" style="display: none;">
-                <img src="Sprites/bigfoot.png">
-                <button onmousedown='buy("bigfoot")'>Buy Big Foot</button>
-                <span>Big foots:</span>
-                <span id="bigfoot">0</span>
-                <span>Price:</span>
-                <span id="bigfootPrice">400000</span>
-                <br>
-            </div>
-            <div id="l89anl" style="display: none;">
-                <img src="Sprites/nymph.png">
-                <button onmousedown='buy("nymph")'>Buy Nymph</button>
-                <span>Nymphs:</span>
-                <span id="nymph">0</span>
-                <span>Price:</span>
-                <span id="nymphPrice">1666666</span>
-                <br>
-            </div>
-            <div id="l90anl" style="display: none;">
-                <img src="Sprites/dragon.png">
-                <button onmousedown='buy("dragon")'>Buy Dragon</button>
-                <span>Dragons:</span>
-                <span id="dragon">0</span>
-                <span>Price:</span>
-                <span id="dragonPrice">10000000</span>
-                <br>
-            </div>
-            <div id="l91anl" style="display: none;">
-                <img src="Sprites/phoenix.png">
-                <button onmousedown='buy("phoenix")'>Buy Phoenix</button>
-                <span>Phoenix:</span>
-                <span id="phoenix">0</span>
-                <span>Price:</span>
-                <span id="phoenixPrice">55000000</span>
-                <br>
-            </div>
-            <div id="l92anl" style="display: none;">
-                <img src="Sprites/demonteddy.png">
-                <button onmousedown='buy("demonteddy")'>Buy Demon Teddy Bear</button>
-                <span>Demon Teddy Bears:</span>
-                <span id="demonteddy">0</span>
-                <span>Price:</span>
-                <span id="demonteddyPrice">1000000000</span>
-            </div>
-            <div>
-                <img src="Sprites/qmark.png">
-                <button>???</button>
-                <span>???</span>
-            </div>
-        </div>
-    </div>
-    <div style="display: none;" id="tabpage2" class="tabpage">
-        <header>Skills</header>
-    </div>
-    <div style="display: none;" id="tabpage3" class="tabpage">
-        <header>Artifacts</header>
-        <button>3</button>
-    </div>
-    <div style="display: none;" id="tabpage4" class="tabpage">
-        <header>Options</header>
-        <br>
-        <button style="width: 200; height: 30; border: 2px solid black; font: 15px calibri;" id="nmrtype" onmousedown="numberTypeChange()">Shortened Notation</button>
-    </div>
-    <button style="background: url(Sprites/rabbit.png); background-size: cover; width: 35%; height: 70%; position: fixed; left: 60%; bottom: 5%; font-size: 35; color: white;" onmousedown="magicClick('x')" id="button">Click Me!</button>
-    <span style="position:fixed; left: 60%; bottom: 80%;">Magic:</span>
-    <a style="position:fixed; left: 68%; bottom: 80%;" id="magic">0</a>
-    <span style="position:fixed; left: 60%; bottom: 75%;">Magic Per Second:</span>
-    <a style="position:fixed; left: 75%; bottom: 75%;" id="mps">0</a>
-    <p style="display: none;" id="description"></p>
+<body style="background-image:url(Sprites/room.png);background-attachment:fixed;background-size:cover" onload="load()" onbeforeunload="unload()">
+<script src="clicker.js"></script>
+<script src="jquery-3.2.1.min.js"></script>
+<button onmousedown='reset("hard")'>Hard Reset</button>
+<button onmousedown="prestige()">Prestige</button>
+<button onmousedown="save()">Save Game</button>
+<button onmousedown="load()">Load Game</button>
+<button id="scenery">Show Scenery</button>
+<br>
+<br>
+<div class="btn-group">
+<button id="tabbtn1" onclick="tab(1)">Upgrades</button>
+<button id="tabbtn2" onclick="tab(2)">Skills</button>
+<button id="tabbtn3" onclick="tab(3)">Artifacts</button>
+<button id="tabbtn4" onclick="tab(4)">Options</button>
+</div>
+<div style="height:75%;width:58%;overflow-y:scroll;overflow-x:hidden;border:3px solid #fff" id="tabpage1" class="tabpage">
+<div>
+<div style="padding-bottom:20px;padding-left:20px" id="shop">
+<p style="color:#fff;font-size:26px">Shop</p>
+<button class="empty" style="display:none" id="shopbtn1">1</button>
+<button class="empty" style="display:none" id="shopbtn2">2</button>
+<button class="empty" style="display:none" id="shopbtn3">3</button>
+<button class="empty" style="display:none" id="shopbtn4">4</button>
+<button class="empty" style="display:none" id="shopbtn5">5</button>
+<button class="empty" style="display:none" id="shopbtn6">6</button>
+<button class="empty" style="display:none" id="shopbtn7">7</button>
+<button class="empty" style="display:none" id="shopbtn8">8</button>
+<button class="empty" style="display:none" id="shopbtn9">9</button>
+</div>
+<header style="padding-left:20px">Upgrades</header>
+<br>
+<div>
+<img src="Sprites/teddy.png" style="width:75;height:75;padding-left:20px">
+<button onmousedown='buy("teddy")'>Buy Teddy</button>
+<span>Teddy bears:</span>
+<span id="teddy">0</span>
+<span>Price:</span>
+<span id="teddyPrice">10</span>
+<br>
+</div>
+<div>
+<img src="Sprites/slime.png">
+<button onmousedown='buy("slime")'>Buy Slime</button>
+<span>Slimes:</span>
+<span id="slime">0</span>
+<span>Price:</span>
+<span id="slimePrice">50</span>
+<br>
+</div>
+<div>
+<img src="Sprites/troll.png">
+<button onmousedown='buy("troll")'>Buy Troll</button>
+<span>Trolls:</span>
+<span id="troll">0</span>
+<span>Price:</span>
+<span id="trollPrice">100</span>
+<br>
+</div>
+<div id="l84anl" style="display:none">
+<img src="Sprites/cookie.png">
+<button onmousedown='buy("cookie")'>Buy Magical cookie</button>
+<span>Magical Cookies:</span>
+<span id="cookie">0</span>
+<span>Price:</span>
+<span id="cookiePrice">500</span>
+<br>
+</div>
+<div id="l85anl" style="display:none">
+<img src="Sprites/bologna.png">
+<button onmousedown='buy("bologna")'>Buy Bologna Man</button>
+<span>Bologna Men:</span>
+<span id="bologna">0</span>
+<span>Price:</span>
+<span id="bolognaPrice">2000</span>
+<br>
+</div>
+<div id="l86anl" style="display:none">
+<img src="Sprites/unicorn.png">
+<button onmousedown='buy("unicorn")'>Buy Unicorn</button>
+<span>Unicorn:</span>
+<span id="unicorn">0</span>
+<span>Price:</span>
+<span id="unicornPrice">10000</span>
+<br>
+</div>
+<div id="l87anl" style="display:none">
+<img src="Sprites/lnmonster.png">
+<button onmousedown='buy("lnmonster")'>Buy L.N. Monster</button>
+<span>Loch Ness Monsters:</span>
+<span id="lnmonster">0</span>
+<span>Price:</span>
+<span id="lnmonsterPrice">80000</span>
+<br>
+</div>
+<div id="l88anl" style="display:none">
+<img src="Sprites/bigfoot.png">
+<button onmousedown='buy("bigfoot")'>Buy Big Foot</button>
+<span>Big foots:</span>
+<span id="bigfoot">0</span>
+<span>Price:</span>
+<span id="bigfootPrice">400000</span>
+<br>
+</div>
+<div id="l89anl" style="display:none">
+<img src="Sprites/nymph.png">
+<button onmousedown='buy("nymph")'>Buy Nymph</button>
+<span>Nymphs:</span>
+<span id="nymph">0</span>
+<span>Price:</span>
+<span id="nymphPrice">1666666</span>
+<br>
+</div>
+<div id="l90anl" style="display:none">
+<img src="Sprites/dragon.png">
+<button onmousedown='buy("dragon")'>Buy Dragon</button>
+<span>Dragons:</span>
+<span id="dragon">0</span>
+<span>Price:</span>
+<span id="dragonPrice">10000000</span>
+<br>
+</div>
+<div id="l91anl" style="display:none">
+<img src="Sprites/phoenix.png">
+<button onmousedown='buy("phoenix")'>Buy Phoenix</button>
+<span>Phoenix:</span>
+<span id="phoenix">0</span>
+<span>Price:</span>
+<span id="phoenixPrice">55000000</span>
+<br>
+</div>
+<div id="l92anl" style="display:none">
+<img src="Sprites/demonteddy.png">
+<button onmousedown='buy("demonteddy")'>Buy Demon Teddy Bear</button>
+<span>Demon Teddy Bears:</span>
+<span id="demonteddy">0</span>
+<span>Price:</span>
+<span id="demonteddyPrice">1000000000</span>
+</div>
+<div>
+<img src="Sprites/qmark.png">
+<button>???</button>
+<span>???</span>
+</div>
+</div>
+</div>
+<div style="display:none" id="tabpage2" class="tabpage">
+<header>Skills</header>
+</div>
+<div style="display:none" id="tabpage3" class="tabpage">
+<header>Artifacts</header>
+</div>
+<div style="display:none" id="tabpage4" class="tabpage">
+<header>Options</header>
+<br>
+<button style="width:200;height:30;border:2px solid #000;font:15px calibri" id="nmrtype" onmousedown="numberTypeChange()">Shortened Notation</button>
+</div>
+<button style="background:url(Sprites/rabbit.png);background-size:cover;width:35%;height:70%;position:fixed;left:60%;bottom:5%;font-size:35;color:#fff" onmousedown='magicClick("x")' id="button">Click Me!</button>
+<span style="position:fixed;left:60%;bottom:80%">Magic:</span>
+<a style="position:fixed;left:68%;bottom:80%" id="magic">0</a>
+<span style="position:fixed;left:60%;bottom:75%">Magic Per Second:</span>
+<a style="position:fixed;left:75%;bottom:75%" id="mps">0</a>
+<p style="display:none" id="description"></p>
 </body>
 </html>
