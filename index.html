@@ -6,6 +6,7 @@
 <title>Magic Clicker</title>
 <body style="background-image:url(Sprites/room.png);background-attachment:fixed;background-size:cover" onload="load()" onbeforeunload="unload()">
 <script src="clicker.js"></script>
+<script src="jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <button onmousedown='reset("hard")'>Hard Reset</button>
 <button onmousedown="save()">Save Game</button>
@@ -156,6 +157,7 @@
 </div>
 <div style="display:none" id="tabpage3" class="tabpage">
 <header>Skills</header>
+<img src="Sprites/skilltree.png" style="width:100%;height:100%">
 </div>
 <div style="display:none" id="tabpage4" class="tabpage">
 <header>Options</header>
@@ -175,9 +177,4 @@
 <span style="left:5%;bottom:40%">MPS:</span>
 <span style="left:50%;bottom:40%" id="mps">0</span>
 <span style="left:5%;bottom:10%;display:none" id="shards">Magic Shards:</span>
-<span style="left:50%;bottom:10%;display:none" id="shards1">0</span>
-</div>
-<p style="display:none" id="description"></p>
-</div>
-</body>
-</html>
+<span style="left:50%;bottom:10%;di
