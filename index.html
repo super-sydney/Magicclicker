@@ -16,8 +16,8 @@
 <div id="body">
 <div class="btn-group">
 <button id="tabbtn1" onclick="tab(1)">Upgrades</button>
-<button id="tabbtn2" onclick="tab(2)">Skills</button>
-<button id="tabbtn3" onclick="tab(3)">Artifacts</button>
+<button id="tabbtn2" onclick="tab(2)">Shop</button>
+<button id="tabbtn3" onclick="tab(3)">Skills</button>
 <button id="tabbtn4" onclick="tab(4)">Options</button>
 </div>
 <div style="height:75%;width:58%;overflow-y:scroll;overflow-x:hidden;border:3px solid #fff" id="tabpage1" class="tabpage">
@@ -151,16 +151,22 @@
 </div>
 </div>
 <div style="display:none" id="tabpage2" class="tabpage">
-<header>Skills</header>
+<header>Shop</header>
+<button onclick="prestige()" id="prestige">Prestige</button>
 </div>
 <div style="display:none" id="tabpage3" class="tabpage">
-<header>Artifacts</header>
-<button onclick="prestige()" id="prestige">Prestige</button>
+<header>Skills</header>
 </div>
 <div style="display:none" id="tabpage4" class="tabpage">
 <header>Options</header>
 <br>
 <button style="width:200;height:30;border:2px solid #000;font-size:15px" id="nmrtype" onmousedown="numberTypeChange()">Shortened Notation</button>
+<header>Stats:</header><br>
+<div style="padding-left:20px">
+<span id="MAT"></span><br>
+<span id="MPS"></span><br>
+<span id="MPC"></span>
+</div>
 </div>
 <button style="background:url(Sprites/rabbit.png);background-size:cover;width:35%;height:70%;position:fixed;left:60%;bottom:5%;font-size:35;color:#fff;cursor:pointer" onmousedown='magicClick("x")' id="button">Click Me!</button>
 <div id="bar">
