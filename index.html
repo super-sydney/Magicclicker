@@ -39,7 +39,7 @@
 <br>
 <div>
 <img src="Sprites/teddy.png" style="width:75;height:75;padding-left:20px">
-<button onmousedown='buy("teddy")'>Buy Teddy</button>
+<button onmousedown='buy("teddy")' class="buildingbtn">Buy Teddy</button>
 <span>Teddy bears:</span>
 <span id="teddy">0</span>
 <span>Price:</span>
@@ -48,7 +48,7 @@
 </div>
 <div>
 <img src="Sprites/slime.png">
-<button onmousedown='buy("slime")'>Buy Slime</button>
+<button onmousedown='buy("slime")' class="buildingbtn">Buy Slime</button>
 <span>Slimes:</span>
 <span id="slime">0</span>
 <span>Price:</span>
@@ -57,7 +57,7 @@
 </div>
 <div>
 <img src="Sprites/troll.png">
-<button onmousedown='buy("troll")'>Buy Troll</button>
+<button onmousedown='buy("troll")' class="buildingbtn">Buy Troll</button>
 <span>Trolls:</span>
 <span id="troll">0</span>
 <span>Price:</span>
@@ -66,7 +66,7 @@
 </div>
 <div id="l84anl" style="display:none">
 <img src="Sprites/cookie.png">
-<button onmousedown='buy("cookie")'>Buy Magical cookie</button>
+<button onmousedown='buy("cookie")' class="buildingbtn">Buy Magical cookie</button>
 <span>Magical Cookies:</span>
 <span id="cookie">0</span>
 <span>Price:</span>
@@ -75,7 +75,7 @@
 </div>
 <div id="l85anl" style="display:none">
 <img src="Sprites/bologna.png">
-<button onmousedown='buy("bologna")'>Buy Bologna Man</button>
+<button onmousedown='buy("bologna")' class="buildingbtn">Buy Bologna Man</button>
 <span>Bologna Men:</span>
 <span id="bologna">0</span>
 <span>Price:</span>
@@ -84,7 +84,7 @@
 </div>
 <div id="l86anl" style="display:none">
 <img src="Sprites/unicorn.png">
-<button onmousedown='buy("unicorn")'>Buy Unicorn</button>
+<button onmousedown='buy("unicorn")' class="buildingbtn">Buy Unicorn</button>
 <span>Unicorn:</span>
 <span id="unicorn">0</span>
 <span>Price:</span>
@@ -93,7 +93,7 @@
 </div>
 <div id="l87anl" style="display:none">
 <img src="Sprites/lnmonster.png">
-<button onmousedown='buy("lnmonster")'>Buy L.N. Monster</button>
+<button onmousedown='buy("lnmonster")' class="buildingbtn">Buy L.N. Monster</button>
 <span>Loch Ness Monsters:</span>
 <span id="lnmonster">0</span>
 <span>Price:</span>
@@ -102,7 +102,7 @@
 </div>
 <div id="l88anl" style="display:none">
 <img src="Sprites/bigfoot.png">
-<button onmousedown='buy("bigfoot")'>Buy Big Foot</button>
+<button onmousedown='buy("bigfoot")' class="buildingbtn">Buy Big Foot</button>
 <span>Big foots:</span>
 <span id="bigfoot">0</span>
 <span>Price:</span>
@@ -111,7 +111,7 @@
 </div>
 <div id="l89anl" style="display:none">
 <img src="Sprites/nymph.png">
-<button onmousedown='buy("nymph")'>Buy Nymph</button>
+<button onmousedown='buy("nymph")' class="buildingbtn">Buy Nymph</button>
 <span>Nymphs:</span>
 <span id="nymph">0</span>
 <span>Price:</span>
@@ -120,7 +120,7 @@
 </div>
 <div id="l90anl" style="display:none">
 <img src="Sprites/dragon.png">
-<button onmousedown='buy("dragon")'>Buy Dragon</button>
+<button onmousedown='buy("dragon")' class="buildingbtn">Buy Dragon</button>
 <span>Dragons:</span>
 <span id="dragon">0</span>
 <span>Price:</span>
@@ -129,7 +129,7 @@
 </div>
 <div id="l91anl" style="display:none">
 <img src="Sprites/phoenix.png">
-<button onmousedown='buy("phoenix")'>Buy Phoenix</button>
+<button onmousedown='buy("phoenix")' class="buildingbtn">Buy Phoenix</button>
 <span>Phoenix:</span>
 <span id="phoenix">0</span>
 <span>Price:</span>
@@ -138,7 +138,7 @@
 </div>
 <div id="l92anl" style="display:none">
 <img src="Sprites/demonteddy.png">
-<button onmousedown='buy("demonteddy")'>Buy Demon Teddy Bear</button>
+<button onmousedown='buy("demonteddy")' class="buildingbtn">Buy Demon Teddy Bear</button>
 <span>Demon Teddy Bears:</span>
 <span id="demonteddy">0</span>
 <span>Price:</span>
@@ -157,7 +157,25 @@
 </div>
 <div style="display:none" id="tabpage3" class="tabpage">
 <header>Skills</header>
-<img src="Sprites/skilltree.png" style="width:100%;height:100%">
+<img src="Sprites/skilltree.png" style="width:125%;height:125%">
+<button id="buildingmain" class="skilltreebtn main" style="bottom:125%;left:58%" onclick="skillTreeBuy(0)">Building</button>
+<button id="buildingeffective" class="skilltreebtn" style="bottom:112%;left:40.5%" onclick="skillTreeBuy(1)">Effective</button>
+<button id="buildingcheaper" class="skilltreebtn" style="bottom:99.5%;left:5%" onclick="skillTreeBuy(2)">Cheaper</button>
+<button id="buildingeffective2" class="skilltreebtn" style="bottom:95%;left:5.5%" onclick="skillTreeBuy(3)">Effective</button>
+<button id="buildingprestige" class="skilltreebtn" style="bottom:99.5%;left:6%" onclick="skillTreeBuy(4)">Empty</button>
+<button id="prestigemain" class="skilltreebtn main" style="bottom:80%;left:113%" onclick="skillTreeBuy(5)">Prestige</button>
+<button id="prestigeeffective" class="skilltreebtn" style="bottom:80%;left:79%" onclick="skillTreeBuy(6)">Effective</button>
+<button id="prestigebuilding" class="skilltreebtn" style="bottom:93%;left:46%" onclick="skillTreeBuy(7)">Building</button>
+<button id="prestigeprevious" class="skilltreebtn" style="bottom:80%;left:25%" onclick="skillTreeBuy(8)">Empty</button>
+<button id="prestigeclicks" class="skilltreebtn" style="bottom:66%;left:11%" onclick="skillTreeBuy(9)">Clicks</button>
+<button id="clickingmain" class="skilltreebtn main" style="bottom:34%;left:57.75%" onclick="skillTreeBuy(10)">Clicking</button>
+<button id="clickingeffective" class="skilltreebtn" style="bottom:47%;left:40.5%" onclick="skillTreeBuy(11)">Effective</button>
+<button id="clickingeffective2" class="skilltreebtn" style="bottom:61%;left:14%" onclick="skillTreeBuy(12)">Effective</button>
+<button id="clickingauto" class="skilltreebtn" style="bottom:61%;left:15%" onclick="skillTreeBuy(13)">Autoclick</button>
+<button id="offlinemain" class="skilltreebtn main" style="bottom:92%;right:67%" onclick="skillTreeBuy(14)">Offline</button>
+<button id="offlineeffective" class="skilltreebtn" style="bottom:103.5%;left:19%" onclick="skillTreeBuy(15)">Effective</button>
+<button id="offlineeffective2" class="skilltreebtn" style="bottom:112.5%;left:19%" onclick="skillTreeBuy(16)">Effective</button>
+<button id="offlineclick" class="skilltreebtn" style="bottom:95%;left:1.75%" onclick="skillTreeBuy(17)">Click</button>
 </div>
 <div style="display:none" id="tabpage4" class="tabpage">
 <header>Options</header>
@@ -177,4 +195,9 @@
 <span style="left:5%;bottom:40%">MPS:</span>
 <span style="left:50%;bottom:40%" id="mps">0</span>
 <span style="left:5%;bottom:10%;display:none" id="shards">Magic Shards:</span>
-<span style="left:50%;bottom:10%;di
+<span style="left:50%;bottom:10%;display:none" id="shards1">0</span>
+</div>
+<p style="display:none" id="description"></p>
+</div>
+</body>
+</html>
